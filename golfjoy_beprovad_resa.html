@@ -139,9 +139,9 @@ const TRIPS = {
     season:'Bäst <b>maj–sep</b> · svensk efterfrågan trendar uppåt (141 → 230)',
     stamp:{n:"15", t1:"Beprövad", t2:"sällskap"},
     steps:[
-      {n:1,cn:"Eden",cd:"Den vänliga uppvärmningen på St Andrews.",proof:"Eden + Jubilee: 15 sällskap"},
-      {n:2,cn:"Jubilee",cd:"Näst tuffast av St Andrews-banorna – nu är du varm.",proof:"Eden + Jubilee: 15 sällskap"},
-      {n:3,cn:"New / Castle",cd:"Ett sista prov innan kronjuvelen.",proof:"Eden + New/Castle: 7"},
+      {n:1,cn:"Eden Course",cd:"Den vänliga uppvärmningen – Harry Colt, 1914.",proof:"Eden + Jubilee: 15 sällskap"},
+      {n:2,cn:"Jubilee Course",cd:"Tuffast på St Andrews – Donald Steel, 1988.",proof:"Eden + Jubilee: 15 sällskap"},
+      {n:3,cn:"New Course",cd:"Old Tom Morris 1895 – tightare än Old.",proof:"Eden + New: 7 · New + Old: 5"},
       {n:4,cn:"Old Course",cd:"Golfens vagga. Här landar resan.",crown:true,proof:"Eden + Old Course: 7"}
     ],
     boende:"Shandon House, Edinburgh", pax:"Oftast kompisgäng (4–8)",
@@ -193,10 +193,23 @@ const TRIPS = {
     boende:"ur bokningarna", pax:"Blandat",
     discover:[],
     voice:null
+  },
+  costablanca: {
+    dest:"Costa Blanca", label:"Spanien · Störst svensk efterfrågan",
+    season:'Bäst <b>vår & höst</b> · svensk toppdestination (306 resenärer/år)',
+    stamp:{n:"3", t1:"Beprövad", t2:"sällskap"},
+    steps:[
+      {n:1,cn:"Alicante Golf",cd:"Seve Ballesteros, 1998 – flack och vidöppen, mjuk start.",proof:"Alicante + Mar Menor: 3 sällskap"},
+      {n:2,cn:"Mar Menor",cd:"Thomas & Nicklaus – resortbana med sjöar.",proof:"Alicante + Mar Menor: 3 sällskap"},
+      {n:3,cn:"Las Colinas",cd:"Cabell Robinson, 2010 – topp-20 i Spanien. Kronjuvelen.",crown:true,proof:"Las Colinas + Villamartín: 2"}
+    ],
+    boende:"Las Colinas Resort / Mar Menor", pax:"Oftast kompisgäng",
+    discover:[],
+    voice:null
   }
 };
 
-const ORDER=[["skottland","Skottland"],["lissabon","Lissabon"],["algarve","Algarve"],["costadelsol","Costa del Sol"]];
+const ORDER=[["skottland","Skottland"],["costablanca","Costa Blanca"],["lissabon","Lissabon"],["algarve","Algarve"],["costadelsol","Costa del Sol"]];
 const picker=document.getElementById('picker');
 ORDER.forEach(([k,lbl],i)=>{
   const b=document.createElement('button');
