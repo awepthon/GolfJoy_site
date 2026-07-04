@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Golf Joy Caddie — Beprövad resa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#0E2A22; --green2:#143a2e; --parch:#F5F1E6; --parch2:#ECE6D5;
+    --ink:#0B1F19; --brass:#C6A24B; --brass-d:#9d7f34; --sage:#6E8677; --line:#d8cfb8;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--green);color:var(--parch);
+    font-family:'Inter',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+  a{color:inherit}
+
+  /* ---- Hero ---- */
+  header.hero{padding:64px 0 30px;position:relative;overflow:hidden}
+  .eyebrow{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--brass);margin:0 0 18px}
+  .hero h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(38px,6.2vw,68px);
+    line-height:1.02;margin:0 0 14px;letter-spacing:-.01em}
+  .hero h1 em{font-style:italic;color:var(--brass)}
+  .hero p.man{font-size:clamp(16px,2vw,20px);max-width:620px;color:#d9d2c2;margin:0 0 8px}
+  .hero p.sub{font-size:14px;color:var(--sage);max-width:560px}
+
+  /* ---- Selector ---- */
+  .picker{display:flex;flex-wrap:wrap;gap:10px;margin:34px 0 8px}
+  .picker button{font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.02em;
+    background:transparent;color:var(--parch);border:1px solid #33564a;border-radius:2px;
+    padding:11px 16px;cursor:pointer;transition:.18s}
+  .picker button:hover{border-color:var(--brass);color:#fff}
+  .picker button[aria-pressed="true"]{background:var(--brass);color:var(--green);border-color:var(--brass);font-weight:700}
+  .picker button:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+
+  /* ---- The proven trip card ---- */
+  main{padding:22px 0 80px}
+  .card{background:var(--parch);color:var(--ink);border-radius:4px;
+    box-shadow:0 30px 60px -30px rgba(0,0,0,.55);overflow:hidden;
+    animation:rise .5s ease both}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;
+    padding:30px 34px 22px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .dest-label{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.26em;
+    text-transform:uppercase;color:var(--brass-d);margin:0 0 6px}
+  .dest{font-family:'Fraunces',serif;font-size:clamp(26px,3.6vw,38px);font-weight:600;margin:0;line-height:1.05}
+  .season{font-family:'Space Mono',monospace;font-size:12px;color:#4a5b52;margin-top:8px}
+  .season b{color:var(--brass-d)}
+
+  /* proof stamp — the signature */
+  .stamp{flex:0 0 auto;text-align:center;border:2px solid var(--brass);border-radius:50%;
+    width:120px;height:120px;display:flex;flex-direction:column;justify-content:center;
+    align-items:center;transform:rotate(-8deg);color:var(--brass-d);position:relative}
+  .stamp::after{content:"";position:absolute;inset:6px;border:1px solid var(--brass);border-radius:50%;opacity:.5}
+  .stamp .n{font-family:'Fraunces',serif;font-size:34px;font-weight:600;line-height:1}
+  .stamp .t1{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;margin-top:3px}
+  .stamp .t2{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.14em;color:#8a7a52}
+
+  .body{padding:26px 34px 32px}
+  .sec-h{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--sage);margin:0 0 16px;display:flex;align-items:center;gap:10px}
+  .sec-h::after{content:"";height:1px;background:var(--line);flex:1}
+
+  /* proven sequence rail */
+  .rail{list-style:none;margin:0 0 30px;padding:0;position:relative}
+  .rail::before{content:"";position:absolute;left:19px;top:8px;bottom:26px;width:2px;
+    background:linear-gradient(var(--line),var(--brass))}
+  .step{display:flex;gap:18px;padding:0 0 20px;position:relative}
+  .step:last-child{padding-bottom:0}
+  .dot{flex:0 0 40px;height:40px;border-radius:50%;background:var(--parch);border:2px solid var(--sage);
+    display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;
+    font-weight:700;font-size:15px;color:var(--green2);z-index:1}
+  .step.crown .dot{border-color:var(--brass);background:var(--brass);color:var(--green);box-shadow:0 0 0 4px rgba(198,162,75,.18)}
+  .step .info{padding-top:6px}
+  .step .cn{font-family:'Fraunces',serif;font-size:20px;font-weight:600;margin:0;line-height:1.15}
+  .step.crown .cn::after{content:"★";color:var(--brass-d);font-size:14px;margin-left:8px;vertical-align:middle}
+  .step .cd{font-size:14px;color:#4f5f57;margin:2px 0 0}
+  .proof{display:inline-block;font-family:'Space Mono',monospace;font-size:11px;
+    background:#eee6cf;color:var(--brass-d);border:1px solid #e0d4ad;border-radius:2px;
+    padding:3px 8px;margin-top:7px;letter-spacing:.03em}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  @media(max-width:680px){.grid{grid-template-columns:1fr}.card-top{flex-direction:column-reverse}}
+  .kv{margin:0 0 14px}
+  .kv .k{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage)}
+  .kv .v{font-size:15px;color:var(--ink)}
+  .discover li{margin:0 0 10px;font-size:14px;color:#3f4f47}
+  .discover b{color:var(--ink)}
+
+  /* Annette's voice */
+  .voice{background:var(--green);color:var(--parch);border-radius:4px;padding:24px 26px;margin-top:8px}
+  .voice.empty{background:#efe9d8;color:#6a6350;border:1px dashed #cabf9f}
+  .voice .who{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--brass);margin:0 0 10px}
+  .voice.empty .who{color:#9a8e6c}
+  .voice q{font-family:'Fraunces',serif;font-style:italic;font-size:17px;line-height:1.5;quotes:none}
+  .voice.empty q{font-family:'Inter',sans-serif;font-style:normal;font-size:14px}
+
+  footer{border-top:1px solid #24463a;margin-top:40px;padding:26px 0 60px;color:var(--sage);font-size:13px}
+  footer b{color:var(--parch)}
+  .disc{font-family:'Space Mono',monospace;font-size:11px;color:#5f7469;margin-top:6px}
+
+  @media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Golf Joy Caddie</p>
+    <h1>Vi gissar aldrig.<br><em>Vi vet.</em></h1>
+    <p class="man">En resa satt av 25 år av vad svenska golfare faktiskt bokade, spelade och återvände till — inte av vad någon vill sälja dig.</p>
+    <p class="sub">Välj en destination. Caddien sätter ihop den beprövade resan.</p>
+    <nav class="picker" id="picker" aria-label="Välj destination"></nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <article class="card" id="card" aria-live="polite"></article>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <b>Så läser du kortet.</b> Sekvensen är ordnad som svenska sällskap faktiskt spelade den — uppvärmning först, kronjuvel sist. Bevisen (<span style="font-family:'Space Mono',monospace">15 sällskap</span>) kommer ur Golf Joys bokningshistorik, helt avidentifierad.
+    <p class="disc">Fakta fylls av systemet · omdöme och röst av Annette · aldrig gissat · inga personuppgifter</p>
+  </div>
+</footer>
+
+<script>
+const TRIPS = {
+  skottland: {
+    dest:"St Andrews & East Lothian", label:"Skottland · Home of Golf",
+    season:'Bäst <b>maj–sep</b> · svensk efterfrågan trendar uppåt (141 → 230)',
+    stamp:{n:"15", t1:"Beprövad", t2:"sällskap"},
+    steps:[
+      {n:1,cn:"Eden",cd:"Den vänliga uppvärmningen på St Andrews.",proof:"Eden + Jubilee: 15 sällskap"},
+      {n:2,cn:"Jubilee",cd:"Näst tuffast av St Andrews-banorna – nu är du varm.",proof:"Eden + Jubilee: 15 sällskap"},
+      {n:3,cn:"New / Castle",cd:"Ett sista prov innan kronjuvelen.",proof:"Eden + New/Castle: 7"},
+      {n:4,cn:"Old Course",cd:"Golfens vagga. Här landar resan.",crown:true,proof:"Eden + Old Course: 7"}
+    ],
+    boende:"Shandon House, Edinburgh", pax:"Oftast kompisgäng (4–8)",
+    discover:[
+      "<b>Glenkinchie Distillery</b> – kort bilresa, guidad tur och provsmakning.",
+      "<b>Cullen Skink</b> & nyplockade ostron – East Lothians färskaste skaldjur.",
+      "<b>The Old Clubhouse, Gullane</b> – lokal pub, skotska ales. Det riktiga 19:e hålet."
+    ],
+    voice:{who:"Annettes röst", text:"East Lothian, även kallad Scotland's Golf Coast, är ett golfparadis strax öster om Edinburgh. Här finns 22 banor inom 20 km — och förutom den suveräna golfen finns mycket annat att förgylla resan med."}
+  },
+  lissabon: {
+    dest:"Lissabon & Silver Coast", label:"Portugal · Kust & kultur",
+    season:'Året runt · svalare somrar tack vare Atlantbrisen · efterfrågan växer',
+    stamp:{n:"★", t1:"Annettes", t2:"röst"},
+    steps:[
+      {n:1,cn:"Quinta da Marinha",cd:"Robert Trent Jones – mjuk start vid havet.",proof:"3 sällskap"},
+      {n:2,cn:"Pestana Beloura",cd:"Parkland i Sintras utkant.",proof:"4 sällskap"},
+      {n:3,cn:"Oitavos Dunes",cd:"Ren links i naturpark – kronjuvelen.",crown:true,proof:"5 sällskap"}
+    ],
+    boende:"Onyria Quinta da Marinha", pax:"Par & mindre sällskap",
+    discover:[
+      "<b>The Silver Coast</b> norr om Lissabon – mat, viner, byar och sandstränder.",
+      "<b>Peniche</b> – fiskebyns vita hus balanserar på klippkanten."
+    ],
+    voice:{who:"Annettes röst · om Praia del Rey", text:"Praia är en klassisk bana som funnits här länge, med de inledande hålen genom tät pinjeskog med smala fairways. Karaktären förändras radikalt när man når hålen som går utmed Atlanten — en magnifik seaside-/linksmiljö med den klippiga kusten."}
+  },
+  algarve: {
+    dest:"Algarve", label:"Portugal · Sol & sväng",
+    season:'Året runt · mild vinter · hög svensk efterfrågan historiskt',
+    stamp:{n:"5", t1:"Beprövad", t2:"sällskap"},
+    steps:[
+      {n:1,cn:"Pestana Alto",cd:"Henry Cotton-klassiker, mjuk inledning.",proof:"Alto + Silves: 5"},
+      {n:2,cn:"Pestana Silves",cd:"Del av samma trio – bokas nästan alltid ihop.",proof:"Silves + Pinhal: 5"},
+      {n:3,cn:"Pinhal",cd:"Pinjekantad avslutning på klustret.",proof:"Alto + Pinhal: 5"}
+    ],
+    boende:"Pestana-gruppen", pax:"Kompisgäng",
+    discover:[],
+    voice:null
+  },
+  costadelsol: {
+    dest:"Costa del Sol", label:"Spanien · Golfkusten",
+    season:'Hög svensk efterfrågan (177/år) · bäst vår & höst',
+    stamp:{n:"3", t1:"Beprövad", t2:"sällskap"},
+    steps:[
+      {n:1,cn:"Parador Málaga",cd:"Bekväm start vid stranden.",proof:"Parador + Rio Real: 3"},
+      {n:2,cn:"Rio Real",cd:"Javier Arana vid Marbella.",proof:"Parador + Rio Real: 3"},
+      {n:3,cn:"Alcaidesa",cd:"Länkar mot Gibraltar – ofta ihop med Atalaya.",proof:"Alcaidesa + Atalaya: 2"}
+    ],
+    boende:"ur bokningarna", pax:"Blandat",
+    discover:[],
+    voice:null
+  }
+};
+
+const ORDER=[["skottland","Skottland"],["lissabon","Lissabon"],["algarve","Algarve"],["costadelsol","Costa del Sol"]];
+const picker=document.getElementById('picker');
+ORDER.forEach(([k,lbl],i)=>{
+  const b=document.createElement('button');
+  b.textContent=lbl; b.setAttribute('aria-pressed', i===0?'true':'false');
+  b.onclick=()=>{[...picker.children].forEach(c=>c.setAttribute('aria-pressed','false'));
+    b.setAttribute('aria-pressed','true'); render(k);};
+  picker.appendChild(b);
+});
+
+function render(key){
+  const t=TRIPS[key];
+  const steps=t.steps.map(s=>`
+    <li class="step ${s.crown?'crown':''}">
+      <div class="dot">${s.crown?'★':s.n}</div>
+      <div class="info">
+        <p class="cn">${s.cn}</p>
+        <p class="cd">${s.cd}</p>
+        ${s.proof?`<span class="proof">▸ ${s.proof}</span>`:''}
+      </div>
+    </li>`).join('');
+  const discover = t.discover.length
+    ? `<ul class="discover" style="margin:0;padding-left:18px">${t.discover.map(d=>`<li>${d}</li>`).join('')}</ul>`
+    : `<p style="font-size:14px;color:#8a8067;font-style:italic">Upptäckter för den här regionen fylls på härnäst.</p>`;
+  const voice = t.voice
+    ? `<div class="voice"><p class="who">${t.voice.who}</p><q>${t.voice.text}</q></div>`
+    : `<div class="voice empty"><p class="who">Annettes röst</p><q>Faktabaserad resa. Annettes omdöme och caddie-läsning fylls på — vi publicerar aldrig en röst innan den är hennes.</q></div>`;
+  document.getElementById('card').innerHTML=`
+    <div class="card-top">
+      <div>
+        <p class="dest-label">${t.label}</p>
+        <h2 class="dest">${t.dest}</h2>
+        <p class="season">${t.season}</p>
+      </div>
+      <div class="stamp" aria-hidden="true">
+        <span class="n">${t.stamp.n}</span>
+        <span class="t1">${t.stamp.t1}</span>
+        <span class="t2">${t.stamp.t2}</span>
+      </div>
+    </div>
+    <div class="body">
+      <p class="sec-h">Den beprövade sekvensen</p>
+      <ul class="rail">${steps}</ul>
+      <div class="grid">
+        <div>
+          <p class="sec-h">Resan runt golfen</p>
+          <div class="kv"><div class="k">Boende</div><div class="v">${t.boende}</div></div>
+          <div class="kv"><div class="k">Vanligast sällskap</div><div class="v">${t.pax}</div></div>
+          <div style="margin-top:14px">${discover}</div>
+        </div>
+        <div>
+          <p class="sec-h">Caddiens ord</p>
+          ${voice}
+        </div>
+      </div>
+    </div>`;
+}
+render('skottland');
+</script>
+</body>
+</html>
