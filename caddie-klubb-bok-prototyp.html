@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>En värld av golf – klubb & resenärernas bok | Golf Joy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F4F1E9;--ink:#1C2C24;--pine:#2C5545;--sea:#12706B;--sun:#C0862C;--stone:#7C7666;--line:rgba(28,44,36,.14);--user:#2C5545}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.display{font-family:Fraunces,Georgia,serif;letter-spacing:-.01em}
+.app{max-width:760px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+.top{position:sticky;top:0;z-index:6;background:linear-gradient(180deg,#25453b,#2C5545);color:#F4F1E9;padding:14px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 10px 26px -20px rgba(0,0,0,.7)}
+.avatar{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#3f7a63,#1c7a6f);display:flex;align-items:center;justify-content:center;font-size:20px}
+.who b{font-family:Fraunces;font-weight:600;font-size:18px;display:block;line-height:1.05}
+.who small{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#E7C98B}
+.mstatus{margin-left:auto;font-size:11px;color:#dfe8e2;display:flex;align-items:center;gap:6px}
+.mstatus.member{color:#F4E9CE}
+.reset{background:rgba(255,255,255,.12);border:0;color:#dfe8e2;font:inherit;font-size:11px;padding:6px 11px;border-radius:999px;cursor:pointer;margin-left:10px}
+.thread{flex:1;padding:20px 16px 8px;overflow-y:auto}
+.msg{display:flex;margin:11px 0;animation:rise .4s ease both}.msg.me{justify-content:flex-end}
+.bubble{max-width:88%;padding:12px 15px;border-radius:18px}
+.bot .bubble{background:#fff;border:1px solid var(--line);border-bottom-left-radius:6px}
+.me .bubble{background:var(--user);color:#F4F1E9;border-bottom-right-radius:6px}
+.bubble p{margin:0 0 8px}.bubble p:last-child{margin:0}
+.bubble .lead{font-family:Fraunces;font-size:18px;line-height:1.3}
+.why{font-size:12.5px;color:var(--sea);font-style:italic;margin-top:6px}.why::before{content:"↳ för dig: "}
+@keyframes rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+.chips{display:flex;flex-wrap:wrap;gap:9px;padding:4px 16px 2px}
+.chip{border:1px solid var(--pine);color:var(--pine);background:#fff;border-radius:999px;padding:11px 15px;font:inherit;font-size:14px;font-weight:500;cursor:pointer;transition:.15s}
+.chip:hover{background:var(--pine);color:#fff}
+.chip.sun{border-color:var(--sun);color:#8a5f18}.chip.sun:hover{background:var(--sun);color:#fff}
+.chip.go{background:var(--sun);border-color:var(--sun);color:#fff}
+/* card */
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 14px 34px -24px rgba(28,44,36,.45);margin:6px 0;overflow:hidden;animation:rise .45s ease both}
+.card .hd{padding:14px 16px 8px}.card .hd h3{margin:0;font-size:19px}.card .hd .sub{font-size:12.5px;color:var(--stone)}
+.card .bd{padding:6px 16px 16px}
+.field{margin:10px 0}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--pine);margin-bottom:4px}
+.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;font-size:15px;background:#fbfaf6}
+.field textarea{min-height:54px;resize:vertical}
+.two{display:flex;gap:10px}.two .field{flex:1}
+.pillset{display:flex;flex-wrap:wrap;gap:7px}
+.pill{border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:13px;cursor:pointer;background:#fff}
+.pill.on{background:var(--pine);color:#fff;border-color:var(--pine)}
+.consent{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;color:var(--stone);background:#fffdf7;border:1px dashed rgba(192,134,44,.4);border-radius:10px;padding:10px 12px;margin-top:8px}
+.consent input{margin-top:3px}
+.btnrow{display:flex;gap:8px;margin-top:12px}
+.btnrow button{flex:1;border:0;border-radius:999px;padding:12px;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.b-primary{background:var(--sun);color:#fff}.b-ghost{background:#fff;border:1px solid var(--line)!important;color:var(--pine)}
+/* guestbook */
+.book .hd{background:linear-gradient(120deg,#2C5545,#12706B);color:#F4F1E9;padding:14px 16px}
+.book .hd h3{color:#FCFAF3}.book .hd .sub{color:#cfe0d6}
+.entry{padding:13px 16px;border-bottom:1px solid var(--line)}
+.entry:last-child{border-bottom:0}
+.entry .meta{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.eav{width:26px;height:26px;border-radius:50%;background:var(--pine);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600}
+.entry .nm{font-weight:600;font-size:14px}.entry .hc{font-size:12px;color:var(--stone)}
+.entry .txt{font-family:Fraunces;font-style:italic;font-size:15.5px;line-height:1.4;color:#2a382f}
+.entry.mine{background:#fbfdf9}
+.verified{font-size:10px;font-weight:600;color:var(--sea);border:1px solid var(--line);border-radius:999px;padding:1px 7px;margin-left:auto;text-transform:uppercase;letter-spacing:.05em}
+.locked{padding:14px 16px;background:#faf8f2;border-top:1px solid var(--line);display:flex;gap:10px;align-items:center}
+.locked .t{font-size:13.5px;color:var(--stone)}
+.foot{position:sticky;bottom:0;background:rgba(244,241,233,.93);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:11px 16px}
+.inbar{display:flex;gap:9px;align-items:center}
+.inbar input{flex:1;border:1px solid var(--line);border-radius:999px;padding:12px 16px;font:inherit;font-size:15px;background:#fff}
+.inbar button{border:0;background:var(--pine);color:#fff;border-radius:50%;width:44px;height:44px;font-size:18px;cursor:pointer}
+.trust{text-align:center;font-size:11px;color:var(--stone);margin-top:7px}
+.typing span{display:inline-block;width:6px;height:6px;margin:0 1px;border-radius:50%;background:#b7b2a4;animation:blink 1.2s infinite}
+.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,60%,100%{opacity:.3}30%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.msg,.card{animation:none}.typing span{animation:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <div class="avatar">🏌️</div>
+    <div class="who"><b>Caddie</b><small>En värld av golf</small></div>
+    <div class="mstatus" id="mstatus">gäst</div>
+    <button class="reset" id="reset">Börja om</button>
+  </div>
+  <div class="thread" id="thread"></div>
+  <div class="foot">
+    <div class="inbar"><input id="inp" placeholder="Skriv fritt…" autocomplete="off"><button id="send">➤</button></div>
+    <div class="trust">Läs fritt som gäst · bli medlem för att skriva &amp; resa ihop</div>
+  </div>
+</div>
+<script>
+const sess={};
+const mem={async get(k){try{if(window.storage){const r=await window.storage.get('gv_'+k);return r?r.value:null;}}catch(e){}try{return localStorage.getItem('gv_'+k);}catch(e){}return sess[k]??null;},
+ async set(k,v){try{if(window.storage){await window.storage.set('gv_'+k,v);return;}}catch(e){}try{localStorage.setItem('gv_'+k,v);return;}catch(e){}sess[k]=v;},
+ async clear(){try{Object.keys(localStorage).forEach(k=>{if(k.startsWith('gv_'))localStorage.removeItem(k);});}catch(e){}}};
+
+const SEED=[
+ {nm:'Marie & Johan',hc:'hcp 20',txt:'Hej! Vi var här i maj – ät på O Triskel och be om bordet vid fönstret. Spela Pals tidig morgon när daggen ligger kvar. Magiskt.'},
+ {nm:'Anders',hc:'hcp 14',txt:'Empordà Links snabbaste greener jag spelat på – underskatta dem inte! Och ta en cava på Camiral-terrassen vid solnedgången.'},
+];
+let PROFILE=null;
+const INT={vin:'Vin & mat',konst:'Konst & kultur',stad:'Storstad & fotboll',strand:'Strand & sol'};
+
+const thread=document.getElementById('thread');
+function scroll(){thread.scrollTop=thread.scrollHeight;}
+function bubble(h,who='bot'){const m=document.createElement('div');m.className='msg '+who;m.innerHTML=`<div class="bubble">${h}</div>`;thread.appendChild(m);scroll();return m;}
+function typing(cb,d=650){const m=document.createElement('div');m.className='msg bot';m.innerHTML='<div class="bubble typing"><span></span><span></span><span></span></div>';thread.appendChild(m);scroll();setTimeout(()=>{m.remove();cb();},d);}
+function chipsRow(list){const r=document.createElement('div');r.className='chips';list.forEach(c=>{const b=document.createElement('button');b.className='chip'+(c.cls?' '+c.cls:'');b.textContent=c.label;b.onclick=()=>c.on(b);r.appendChild(b);});thread.appendChild(r);scroll();return r;}
+
+async function entries(){const saved=JSON.parse(await mem.get('entries')||'[]');return [...SEED,...saved];}
+async function renderBook(canWrite){
+  const list=await entries();
+  const rows=list.map(e=>`<div class="entry ${e.mine?'mine':''}"><div class="meta"><span class="eav">${e.nm[0]}</span>
+     <span class="nm">${e.nm}</span><span class="hc">${e.hc}</span><span class="verified">◆ medlem</span></div>
+     <div class="txt">”${e.txt}”</div></div>`).join('');
+  const foot = canWrite
+    ? `<div class="locked" style="background:#fbfdf9"><div class="t">Skriv en hälsning till nästa resenär:</div></div>
+       <div class="bd"><div class="field"><textarea id="newentry" placeholder="Hej! Vårt bästa tips från Costa Brava…"></textarea></div>
+       <div class="btnrow"><button class="b-primary" id="postentry">Lägg i boken</button></div></div>`
+    : `<div class="locked"><span>🔒</span><div class="t">Bara medlemmar skriver i boken – så håller vi tonen varm och äkta.</div>
+       <button class="chip go" id="joinfrombook" style="margin-left:auto">Bli medlem</button></div>`;
+  const el=document.createElement('div');el.className='msg bot';
+  el.innerHTML=`<div class="bubble" style="max-width:96%;padding:0;background:transparent;border:0">
+    <div class="card book"><div class="hd"><h3>Resenärernas bok</h3><div class="sub">Costa Brava · hälsningar från andra medlemmar</div></div>
+    ${rows}${foot}</div></div>`;
+  thread.appendChild(el);scroll();
+  if(canWrite){el.querySelector('#postentry').onclick=async()=>{
+    const t=el.querySelector('#newentry').value.trim();if(!t)return;
+    const saved=JSON.parse(await mem.get('entries')||'[]');
+    saved.push({nm:PROFILE.name,hc:'hcp '+(PROFILE.hcp||'–'),txt:t,mine:true});
+    await mem.set('entries',JSON.stringify(saved));
+    bubble('Min hälsning är inlagd 🖊️','me');
+    typing(()=>{bubble('<p>Tack – din röst hjälper nästa resenär, och den blir en del av vad jag drömmer fram åt andra. 🌿</p>');},600);
+  };}
+  else el.querySelector('#joinfrombook').onclick=()=>memberMoment('boken');
+}
+
+function memberMoment(reason){
+  const why = reason==='boken'
+    ? 'För att skriva i resenärernas bok'
+    : 'För att jag ska kunna koppla ihop dig tryggt med andra resenärer';
+  typing(()=>{
+    bubble(`<p class="lead">Vill du bli medlem i En värld av golf? Gratis. 🌿</p>
+      <p>${why} ber jag om ett enkelt medlemskap. Då är du en verifierad medresenär – och jag lär känna ditt spel så mina förslag blir träffsäkra.</p>`);
+    const el=document.createElement('div');el.className='msg bot';
+    el.innerHTML=`<div class="bubble" style="max-width:94%;padding:0;background:transparent;border:0">
+      <div class="card"><div class="hd"><h3>Bli medlem</h3><div class="sub">Tar 20 sekunder · du väljer vad som visas för andra</div></div>
+      <div class="bd">
+        <div class="field"><label>Vad ska jag kalla dig?</label><input id="f-name" placeholder="Förnamn"></div>
+        <div class="two"><div class="field"><label>Hemmaklubb</label><input id="f-club" placeholder="t.ex. Halmstad GK"></div>
+          <div class="field"><label>Hcp</label><input id="f-hcp" placeholder="t.ex. 18"></div></div>
+        <div class="field"><label>Spelar helst med</label>
+          <select id="f-play"><option>Lugnt sällskap, sällskapsgolf</option><option>Blandat – vem som helst</option><option>Tävlingsinriktat</option></select></div>
+        <div class="field"><label>Vad lockar utöver golfen?</label>
+          <div class="pillset" id="f-int">${Object.entries(INT).map(([k,v])=>`<span class="pill" data-k="${k}">${v}</span>`).join('')}</div></div>
+        <div class="field"><label>En rad om dig (valfritt)</label><textarea id="f-bio" placeholder="t.ex. Reser gärna i oktober, älskar snabba greener och en god middag."></textarea></div>
+        <label class="consent"><input type="checkbox" id="f-consent"><span>Jag godkänner att min profil används för att matcha mig och ge personliga förslag. Du kan när som helst ändra vad som visas eller gå ur. (GDPR)</span></label>
+        <div class="btnrow"><button class="b-ghost" id="f-skip">Inte nu</button><button class="b-primary" id="f-join">Bli medlem</button></div>
+      </div></div></div>`;
+    thread.appendChild(el);scroll();
+    const ints=[];el.querySelectorAll('.pill').forEach(p=>p.onclick=()=>{p.classList.toggle('on');const k=p.dataset.k;const i=ints.indexOf(k);i<0?ints.push(k):ints.splice(i,1);});
+    el.querySelector('#f-skip').onclick=()=>{bubble('Inte nu','me');typing(()=>bubble('<p>Inga problem – läs och drömma fritt så länge. Jag finns här när du vill. 🌿</p>'),500);};
+    el.querySelector('#f-join').onclick=async()=>{
+      const name=el.querySelector('#f-name').value.trim();
+      if(!name){el.querySelector('#f-name').focus();return;}
+      if(!el.querySelector('#f-consent').checked){el.querySelector('.consent').style.color='#b3541e';return;}
+      PROFILE={name,club:el.querySelector('#f-club').value.trim(),hcp:el.querySelector('#f-hcp').value.trim(),
+        play:el.querySelector('#f-play').value,ints,bio:el.querySelector('#f-bio').value.trim()};
+      await mem.set('member',JSON.stringify(PROFILE));
+      setMemberUI();bubble('Bli medlem','me');welcome(reason);
+    };
+  },600);
+}
+function setMemberUI(){const s=document.getElementById('mstatus');s.textContent='◆ medlem'+(PROFILE.name?' · '+PROFILE.name:'');s.classList.add('member');}
+
+function welcome(reason){
+  typing(()=>{
+    const intTxt=PROFILE.ints.length?PROFILE.ints.map(k=>INT[k].toLowerCase()).join(' & '):'golfen';
+    bubble(`<p class="lead">Välkommen till klubben, ${PROFILE.name}! ◆</p>
+      <p>Nu är du en verifierad medresenär – tryggt för både dig och de du reser med. Och jag har din profil: ${PROFILE.hcp?('hcp '+PROFILE.hcp+', '):''}${PROFILE.play.toLowerCase()}, gillar ${intTxt}.</p>`);
+    typing(()=>{
+      // preferenslager i praktiken
+      const suggests=[];
+      if(PROFILE.ints.includes('vin'))suggests.push('Peraladas vingårdsbana med Wine Spa');
+      if(PROFILE.play.includes('Lugnt'))suggests.push('Golf de Pals i tidig morgon – lugnt tempo, magisk stämning');
+      if(PROFILE.ints.includes('stad'))suggests.push('El Prat + en storstadsnatt i Barcelona');
+      if(!suggests.length)suggests.push('Empordàs två banor – Forest och Links, helt olika karaktär');
+      bubble(`<p><b>Nu blir mina förslag personliga.</b> Utifrån din profil skulle jag lyfta fram:</p>
+        <p>${suggests.map(s=>'• '+s).join('<br>')}<div class="why">${PROFILE.play.toLowerCase()}${PROFILE.ints.length?' och '+PROFILE.ints.map(k=>INT[k].toLowerCase()).join(' & '):''}</div></p>
+        <p>Och ju mer vi reser ihop, desto bättre lär jag känna dig – nästa gång börjar jag där vi slutade.</p>`);
+      typing(()=>{
+        if(reason==='boken'){bubble('<p>Nu kan du skriva i resenärernas bok. Här är den:</p>');renderBook(true);}
+        else{bubble('<p>Och nu kan jag koppla ihop dig tryggt med andra medlemmar i avgångarna. Vill du se boken eller resa-tillsammans?</p>');
+          chipsRow([{label:'Läs resenärernas bok',cls:'sun',on:()=>renderBook(true)},{label:'Klart för nu',cls:'go',on:()=>bubble('<p>Toppen – med dig hela vägen. ⛳</p>')}]);}
+      },900);
+    },900);
+  },700);
+}
+
+async function start(){
+  const saved=await mem.get('member');
+  if(saved){PROFILE=JSON.parse(saved);setMemberUI();
+    typing(()=>{bubble(`<p class="lead">Välkommen tillbaka, ${PROFILE.name}! ◆</p>
+      <p>Jag minns ditt spel${PROFILE.hcp?(' – hcp '+PROFILE.hcp):''}${PROFILE.ints.length?(', gillar '+PROFILE.ints.map(k=>INT[k].toLowerCase()).join(' & ')):''}. Vill du läsa resenärernas bok, eller ska jag föreslå något som passar dig?</p>`);
+      chipsRow([{label:'Läs & skriv i boken',cls:'sun',on:()=>renderBook(true)},{label:'Föreslå något för mig',cls:'go',on:()=>welcome('förslag')}]);},600);
+    return;}
+  typing(()=>{
+    bubble(`<p class="lead">Hej! Välkommen till En värld av golf. 🌿</p>
+      <p>Här kan du läsa <b>resenärernas bok</b> fritt – äkta tips från andra som varit på plats. Vill du <b>skriva själv</b> eller <b>resa tillsammans</b> med andra ber jag om ett enkelt medlemskap, så blir det tryggt för alla.</p>`);
+    chipsRow([{label:'Läs resenärernas bok',cls:'sun',on:()=>renderBook(false)},{label:'Bli medlem direkt',cls:'go',on:()=>memberMoment('bli')}]);
+  },500);
+}
+document.getElementById('send').onclick=go;
+document.getElementById('inp').addEventListener('keydown',e=>{if(e.key==='Enter')go();});
+function go(){const i=document.getElementById('inp');const v=i.value.trim();if(!v)return;i.value='';bubble(v,'me');typing(()=>{bubble('<p>Vill du läsa resenärernas bok eller bli medlem?</p>');chipsRow([{label:'Läs boken',cls:'sun',on:()=>renderBook(!!PROFILE)},{label:'Bli medlem',cls:'go',on:()=>memberMoment('bli')}]);},550);}
+document.getElementById('reset').onclick=async()=>{await mem.clear();location.reload();};
+start();
+</script>
+</body>
+</html>

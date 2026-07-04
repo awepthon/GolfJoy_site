@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>En värld av golf · Caddie – hela resan | Golf Joy</title>
+<meta name="theme-color" content="#2C5545">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F4F1E9;--paper2:#EBE6D9;--ink:#1C2C24;--pine:#2C5545;--sea:#12706B;--sun:#C0862C;--stone:#7C7666;--line:rgba(28,44,36,.14);--shadow:0 1px 2px rgba(28,44,36,.05),0 14px 34px -22px rgba(28,44,36,.4)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.display{font-family:Fraunces,Georgia,serif;letter-spacing:-.01em;font-weight:500}
+.wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+a{color:inherit}
+.eyebrow{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--sea);font-weight:600}
+
+/* hero */
+.hero{background:radial-gradient(120% 90% at 85% -10%,rgba(18,112,107,.30),transparent 55%),radial-gradient(90% 80% at 0% 115%,rgba(44,85,69,.36),transparent 60%),linear-gradient(180deg,#20423a,#2C5545 62%,#356149);color:#F4F1E9}
+.hero .wrap{padding:64px 22px 58px}
+.hero .brand{font-family:Fraunces;font-weight:600;font-size:20px}
+.hero .brand small{display:block;font-family:Inter;font-weight:600;font-size:10px;letter-spacing:.26em;color:#E7C98B;margin-top:1px}
+.hero h1{font-size:clamp(40px,7vw,74px);color:#FCFAF3;margin:26px 0 10px;line-height:1.02}
+.hero .lede{font-family:Fraunces;font-style:italic;font-size:clamp(18px,2.4vw,24px);color:#E9E4D6;max-width:40ch}
+.hero .frame{margin-top:22px;max-width:60ch;color:#DDE7E0;font-size:16px}
+.coast{display:block;width:100%;height:24px;color:var(--pine);opacity:.5}
+
+/* journey strip */
+.phases{display:flex;gap:8px;flex-wrap:wrap;padding:34px 0 6px}
+.phase{flex:1;min-width:120px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fff}
+.phase .n{font-family:Fraunces;font-size:13px;color:var(--sun);font-weight:600}
+.phase b{display:block;font-family:Fraunces;font-size:17px;margin-top:2px}
+.phase span{font-size:12.5px;color:var(--stone)}
+
+section{padding:20px 0 46px}
+.sechead{display:flex;align-items:baseline;gap:14px;margin:26px 0 4px}
+.sechead h2{font-size:clamp(24px,3.6vw,34px)}
+.muted{color:var(--stone)}
+
+/* step cards */
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+@media(max-width:720px){.steps{grid-template-columns:1fr}}
+.step{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.step .top{height:8px;background:linear-gradient(90deg,var(--sea),var(--pine))}
+.step.t2 .top{background:linear-gradient(90deg,#a58a5a,var(--sun))}
+.step .bd{padding:20px 22px 22px;display:flex;flex-direction:column;flex:1}
+.step .num{font-family:Fraunces;font-size:13px;color:var(--sun);font-weight:600;letter-spacing:.04em}
+.step h3{font-size:22px;margin:4px 0 8px}
+.step p{margin:0 0 16px;font-size:15px;color:#33413a}
+.step .open{margin-top:auto;display:inline-flex;align-items:center;gap:8px;align-self:flex-start;background:var(--pine);color:#fff;text-decoration:none;font-size:14px;font-weight:600;padding:11px 18px;border-radius:999px;transition:.15s}
+.step .open:hover{background:#20423a}
+.step .tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.tag{font-size:11px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;color:var(--sea);font-weight:600}
+
+/* principles */
+.band{background:var(--paper2)}
+.plist{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
+@media(max-width:720px){.plist{grid-template-columns:1fr}}
+.pcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.pcard h3{font-size:18px;margin:0 0 6px}
+.pcard p{margin:0;font-size:14px;color:var(--stone)}
+
+footer{background:var(--ink);color:#C7CFC9;padding:40px 0;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.note{background:#fffdf6;border:1px dashed var(--sun);border-radius:12px;padding:12px 16px;font-size:13px;color:#8a6a1e;margin-top:22px}
+</style>
+</head>
+<body>
+
+<header class="hero"><div class="wrap">
+  <div class="brand">Golf Joy<small>EN VÄRLD AV GOLF</small></div>
+  <h1>Caddie</h1>
+  <div class="lede">Med dig hela vägen — från dröm till första tee, och hela ronden ut.</div>
+  <p class="frame">Ett skifte från traditionell researrangör till en personlig golf-concierge som möter kunden i <b>hela</b> resan. Nedan: sju prototyper med riktig Costa Brava-data, i den ordning resan faktiskt sker. Klicka dig igenom.</p>
+</div></header>
+<svg class="coast" viewBox="0 0 1200 24" preserveAspectRatio="none"><path fill="currentColor" d="M0,9 C120,20 180,2 320,11 C460,20 520,4 680,11 C840,18 900,2 1040,11 C1120,16 1160,9 1200,7 L1200,24 L0,24 Z"/></svg>
+
+<section><div class="wrap">
+  <div class="phases">
+    <div class="phase"><div class="n">01</div><b>Drömma</b><span>väcka lusten</span></div>
+    <div class="phase"><div class="n">02</div><b>Planera</b><span>forma resan</span></div>
+    <div class="phase"><div class="n">03</div><b>Förbereda</b><span>inför avresa</span></div>
+    <div class="phase"><div class="n">04</div><b>På plats</b><span>med under resan</span></div>
+    <div class="phase"><div class="n">05</div><b>Hem igen</b><span>minne & retur</span></div>
+  </div>
+
+  <div class="sechead"><h2>Hela resan, steg för steg</h2></div>
+  <p class="muted" style="max-width:56ch;margin:2px 0 0">Varje steg är en egen prototyp. Öppnas i ny flik. Håll filerna i samma mapp så länkarna funkar.</p>
+
+  <div class="steps">
+
+    <article class="step"><div class="top"></div><div class="bd">
+      <div class="num">Steg 1 · Mötet</div>
+      <h3>Första svepet</h3>
+      <div class="tags"><span class="tag">QR</span><span class="tag">Onboarding</span><span class="tag">Klubb</span></div>
+      <p>Skylten kunden möter i verkligheten — "Hämta din personliga caddie" med en skannbar QR. Efter svepet: noll friktion, en smakbit, och det mjuka medlemsögonblicket.</p>
+      <a class="open" href="caddie-forsta-svepet-prototyp.html" target="_blank" rel="noopener">Öppna prototyp →</a>
+    </div></article>
+
+    <article class="step"><div class="top"></div><div class="bd">
+      <div class="num">Steg 2 · Drömma</div>
+      <h3>Destinationssidan</h3>
+      <div class="tags"><span class="tag">Skyltfönster</span><span class="tag">SEO</span></div>
+      <p>Det redaktionella skyltfönstret som väcker drömmen: berättelse i din röst, banor och boenden, upplevelser utöver golfen — inte en katalog.</p>
+      <a class="open" href="costa-brava-prototyp.html" target="_blank" rel="noopener">Öppna prototyp →</a>
+    </div></article>
+
+    <article class="step"><div class="top"></div><div class="bd">
+      <div class="num">Steg 3 · Planera</div>
+      <h3>Caddie-planeraren</h3>
+      <div class="tags"><span class="tag">Agent</span><span class="tag">Minne</span></div>
+      <p>Caddien tar kunden i handen och bygger resan live ur din data — banor mot nivå, boende mot vibe — med caddie-tips och motiverade förslag.</p>
+      <a class="open" href="caddie-agent-prototyp.html" target="_blank" rel="noopener">Öppna prototyp →</a>
+    </div></article>
+
+    <article class="step t2"><div class="top"></div><div class="bd">
+      <div class="num">Steg 4 · Res tillsammans</div>
+      <h3>Sällskap redan i planeringen</h3>
+      <div class="tags"><span class="tag">Matchning</span><span class="tag">Avgångar</span></div>
+      <p>Löser singelresenärens köptröskel: formande avgångar, spelpartner-match och gäng-mot-gäng — med integritet inbyggd från start.</p>
+      <a class="open" href="caddie-res-tillsammans-prototyp.html" target="_blank" rel="noopener">Öppna prototyp →</a>
+    </div></article>
+
+    <article class="step t2"><div class="top"></div><div class="bd">
+      <div class="num">Steg 5 · Tillhörighet</div>
+      <h3>Klubb & resenärernas bok</h3>
+      <div class="tags"><span class="tag">Medlemskap</span><span class="tag">Preferenslager</span></div>
+      <p>Medlemskapet gör sällskapet tryggt och håller boken varm (bara medlemmar skriver). Varje profil gör caddien personligare.</p>
+      <a class="open" href="caddie-klubb-bok-prototyp.html" target="_blank" rel="noopener">Öppna prototyp →</a>
+    </div></article>
+
+    <article class="step"><div class="top"></div><div class="bd">
+      <div class="num">Steg 6 · På plats + Hem igen</div>
+      <h3>Caddie under resan</h3>
+      <div class="tags"><span class="tag">Din unika mark</span><span class="tag">PWA</span></div>
+      <p>En resedag: morgonens greenläsning, väder + plan B, sällskapet idag, kvällens bord, och minnet i boken. Det ingen operatör gör.</p>
+      <a class="open" href="caddie-pa-plats-prototyp.html" target="_blank" rel="noopener">Öppna prototyp →</a>
+    </div></article>
+
+  </div>
+
+  <div class="note">Bonus: den allra första samtalsmotorn finns kvar som <a href="golfguide-agent-prototyp.html" target="_blank" rel="noopener">golfguide-agent-prototyp.html</a> (tidig version, ersatt av Caddie-planeraren i steg 3).</div>
+</div></section>
+
+<section class="band"><div class="wrap">
+  <div class="eyebrow">Varför det håller</div>
+  <div class="sechead"><h2>Tre principer under allt</h2></div>
+  <div class="plist">
+    <div class="pcard"><h3>Din röst, aldrig gissad</h3><p>Caddien svarar bara ur Golf Joys egen data — rater och greenfees förblir dina, fakta gissas aldrig. Samma disciplin som i databygget.</p></div>
+    <div class="pcard"><h3>Med hela vägen</h3><p>Traditionella operatörer är tysta under själva resan. Caddien är med — det är den obemannade luckan du äger.</p></div>
+    <div class="pcard"><h3>Vallgraven</h3><p>25 års rater, röst och relationer + hela IAGTO-världen i Supabase + kundhistoriken som startbränsle. Kan inte kopieras.</p></div>
+  </div>
+  <div class="note">Nästa kliv: skarp Caddie på Claude + live-Supabase, som installerbar PWA på en privat Vercel-preview (rör ej ONE/WordPress) · "välkommen tillbaka" ur Fortnox-historiken · GDPR-grund för klubb & import. Allt fångat i arbetsdokumentet G0420.</div>
+</div></section>
+
+<footer><div class="wrap">
+  <div><strong>Golf Joy</strong> · En värld av golf<br><span style="color:#8fa39a">Caddie – med dig hela vägen</span></div>
+  <div style="text-align:right;color:#8fa39a">Prototyper · riktig Costa Brava-data<br>2026</div>
+</div></footer>
+
+</body>
+</html>

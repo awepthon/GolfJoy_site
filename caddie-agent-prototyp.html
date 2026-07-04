@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caddie – med dig hela vägen | Golf Joy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F4F1E9;--ink:#1C2C24;--pine:#2C5545;--sea:#12706B;--sun:#C0862C;
+  --stone:#7C7666;--line:rgba(28,44,36,.14);--user:#2C5545}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.display,h1,h2,h3{font-family:Fraunces,Georgia,serif;letter-spacing:-.01em}
+.app{max-width:760px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+
+/* header */
+.top{position:sticky;top:0;z-index:6;background:linear-gradient(180deg,#25453b,#2C5545);color:#F4F1E9;padding:14px 18px 10px;box-shadow:0 10px 26px -20px rgba(0,0,0,.7)}
+.top .row1{display:flex;align-items:center;gap:12px}
+.avatar{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#3f7a63,#1c7a6f);display:flex;align-items:center;justify-content:center;font-size:20px}
+.top .who b{font-family:Fraunces;font-weight:600;font-size:18px;display:block;line-height:1.05}
+.top .who small{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#E7C98B}
+.reset{margin-left:auto;background:rgba(255,255,255,.12);border:0;color:#dfe8e2;font:inherit;font-size:11px;padding:6px 11px;border-radius:999px;cursor:pointer}
+/* phase pips */
+.phases{display:flex;gap:5px;margin-top:11px;font-size:10px;letter-spacing:.05em}
+.pp{flex:1;text-align:center;color:#9fbcae;padding-bottom:7px;border-bottom:2px solid rgba(255,255,255,.15);text-transform:uppercase;font-weight:600;transition:.3s}
+.pp.on{color:#F4E9CE;border-color:var(--sun)}
+.pp.done{color:#cfe0d6;border-color:rgba(231,201,139,.5)}
+
+/* trip tray */
+.tray{position:sticky;top:96px;z-index:5;background:#fffdf7;border-bottom:1px solid var(--line)}
+.tray .bar{display:flex;align-items:center;gap:10px;padding:10px 18px;cursor:pointer}
+.tray .bar b{font-family:Fraunces;font-size:15px}
+.tray .cnt{background:var(--sun);color:#fff;border-radius:999px;font-size:11px;font-weight:600;padding:2px 8px}
+.tray .chev{margin-left:auto;color:var(--stone);transition:.25s;font-size:13px}
+.tray.open .chev{transform:rotate(180deg)}
+.tray .chipline{display:flex;gap:6px;overflow-x:auto;padding:0 18px 10px}
+.tchip{white-space:nowrap;font-size:12px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;background:#fff;animation:pop .4s ease both}
+@keyframes pop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:none}}
+.tray .full{display:none;padding:2px 18px 14px}
+.tray.open .full{display:block}
+.tray.open .chipline{display:none}
+.trow{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--line)}
+.trow:last-child{border:0}
+.trow .ic{flex:none;width:26px;height:26px;border-radius:7px;background:#eef3ef;color:var(--pine);display:flex;align-items:center;justify-content:center;font-size:13px}
+.trow b{font-size:14px}.trow .m{font-size:12px;color:var(--stone)}
+.empty{color:var(--stone);font-size:13px;padding:2px 18px 12px}
+
+/* thread */
+.thread{flex:1;padding:18px 16px 8px;overflow-y:auto}
+.msg{display:flex;margin:11px 0;animation:rise .4s ease both}
+.msg.me{justify-content:flex-end}
+.bubble{max-width:84%;padding:12px 15px;border-radius:18px}
+.bot .bubble{background:#fff;border:1px solid var(--line);border-bottom-left-radius:6px}
+.me .bubble{background:var(--user);color:#F4F1E9;border-bottom-right-radius:6px}
+.bubble p{margin:0 0 8px}.bubble p:last-child{margin:0}
+.bubble .lead{font-family:Fraunces;font-size:17px;line-height:1.3}
+.why{font-size:12.5px;color:var(--sea);font-style:italic;margin-top:6px}
+.why::before{content:"↳ därför: "}
+.tip{background:#fffdf5;border:1px solid rgba(192,134,44,.4);border-radius:12px;padding:11px 13px;margin-top:8px}
+.tip .k{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sun);font-weight:600}
+.tip p{margin:4px 0 0;font-size:14px}
+@keyframes rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:9px;padding:4px 16px 2px}
+.chip{border:1px solid var(--pine);color:var(--pine);background:#fff;border-radius:999px;padding:10px 15px;font:inherit;font-size:14px;font-weight:500;cursor:pointer;transition:.15s}
+.chip:hover{background:var(--pine);color:#fff}
+.chip.sun{border-color:var(--sun);color:#8a5f18}.chip.sun:hover{background:var(--sun);color:#fff}
+.chip.sel{background:var(--pine);color:#fff}
+.chip.go{background:var(--sun);border-color:var(--sun);color:#fff}
+
+/* composer */
+.foot{position:sticky;bottom:0;background:rgba(244,241,233,.93);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:11px 16px}
+.inbar{display:flex;gap:9px;align-items:center}
+.inbar input{flex:1;border:1px solid var(--line);border-radius:999px;padding:12px 16px;font:inherit;font-size:15px;background:#fff}
+.inbar button{border:0;background:var(--pine);color:#fff;border-radius:50%;width:44px;height:44px;font-size:18px;cursor:pointer}
+.trust{text-align:center;font-size:11px;color:var(--stone);margin-top:7px}
+.typing span{display:inline-block;width:6px;height:6px;margin:0 1px;border-radius:50%;background:#b7b2a4;animation:blink 1.2s infinite}
+.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,60%,100%{opacity:.3}30%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.msg,.tchip{animation:none}.typing span{animation:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <div class="row1">
+      <div class="avatar">🏌️</div>
+      <div class="who"><b>Caddie</b><small>Golf Joy · med dig hela vägen</small></div>
+      <button class="reset" id="reset">Börja om</button>
+    </div>
+    <div class="phases" id="phases">
+      <div class="pp on" data-p="0">Drömma</div>
+      <div class="pp" data-p="1">Planera</div>
+      <div class="pp" data-p="2">Förbereda</div>
+      <div class="pp" data-p="3">På plats</div>
+      <div class="pp" data-p="4">Hem igen</div>
+    </div>
+  </div>
+
+  <div class="tray" id="tray">
+    <div class="bar" id="traybar">
+      <b>Din resa</b><span class="cnt" id="traycnt">0</span>
+      <span class="chev">▾</span>
+    </div>
+    <div class="chipline" id="traychips"></div>
+    <div class="full" id="trayfull"></div>
+    <div class="empty" id="trayempty">Ingenting inlagt än – vi bygger den tillsammans.</div>
+  </div>
+
+  <div class="thread" id="thread"></div>
+
+  <div class="foot">
+    <div class="inbar">
+      <input id="inp" placeholder="Skriv fritt… t.ex. 'golfvecka i oktober, gärna vin'" autocomplete="off">
+      <button id="send" aria-label="Skicka">➤</button>
+    </div>
+    <div class="trust">Caddie läser Golf Joys egen data &amp; röst · gissar aldrig fakta eller greenfee</div>
+  </div>
+</div>
+
+<script>
+/* ---------- safe memory (artifact-storage → localStorage → session) ---------- */
+const sess={};
+const mem={
+  async get(k){try{if(window.storage){const r=await window.storage.get('caddie_'+k);return r?r.value:null;}}catch(e){}
+    try{return localStorage.getItem('caddie_'+k);}catch(e){} return sess[k]??null;},
+  async set(k,v){try{if(window.storage){await window.storage.set('caddie_'+k,v);return;}}catch(e){}
+    try{localStorage.setItem('caddie_'+k,v);return;}catch(e){} sess[k]=v;},
+  async clear(){try{if(window.storage){const l=await window.storage.list('caddie_');if(l&&l.keys)for(const k of l.keys)await window.storage.delete(k);}}catch(e){}
+    try{Object.keys(localStorage).forEach(k=>{if(k.startsWith('caddie_'))localStorage.removeItem(k);});}catch(e){}}
+};
+
+/* ---------- data (spegel av Supabase Costa Brava) ---------- */
+const COURSES=[
+ {namn:'PGA Stadium',resort:'Camiral',lvl:['lag','mellan'],par:72,langd:'6 226 m',design:'Á. Gallardo',
+  say:'En suverän bana – utmanande och kuperad, varje hål har sin karaktär. Värd för Ryder Cup 2031.',
+  tip:'Stadium belönar den som spelar konservativt från tee – lägg bollen på rätt sida av fairway så öppnar sig greenen.'},
+ {namn:'PGA Tour',resort:'Camiral',lvl:['mellan','ny'],par:72,langd:'5 546 m',design:'N. Coles',
+  say:'Något enklare än Stadium, mindre kuperad men mycket rolig att spela.'},
+ {namn:'Empordà Links',resort:'Empordà',lvl:['lag','mellan'],par:71,langd:'5 971 m',design:'R. von Hagge',
+  say:'Vatten, sanddyner och enorma greener.',
+  tip:'Greenerna är så snabba att bollen inte stannar förrän den slutar rulla – sikta under hålet och putta defensivt.'},
+ {namn:'Empordà Forest',resort:'Empordà',lvl:['mellan','ny'],par:72,langd:'5 866 m',design:'R. von Hagge',
+  say:'Kantad av pinjeträd, topprankad i Europa.'},
+ {namn:'Golf de Pals',resort:'',lvl:['mellan','ny'],par:73,langd:'6 036 m',design:'F.G. Hawtree',
+  say:'En av Spaniens äldsta och bästa.',
+  tip:'De första 12 hålen ligger i pinjeskog och kräver eftertanke – vänta med drivern till de öppna avslutande hålen.'},
+ {namn:'El Prat – Rosa',resort:'Real Club El Prat',lvl:['lag','mellan'],par:72,langd:'45 hål totalt',design:'Greg Norman',
+  say:'Signaturbanan bland El Prats fem slingor – har hållit spanska öppna 10 gånger.',
+  tip:'Rosans framnio slingrar tight genom skogen; håll dig på fairway så belönas du av den mäktiga backnion.'},
+ {namn:'TorreMirona',resort:'TorreMirona',lvl:['mellan','ny'],par:72,langd:'5 713 m',design:'Aguado & Soler',
+  say:'Championshipbana med Pyrenéerna som fond.',
+  tip:'Signaturhål 5 är en par 3 med ö-green – ta en klubba mer än du tror och sikta på mitten.'},
+ {namn:'Golf Club Peralada',resort:'Peralada',lvl:['mellan','ny'],par:71,langd:'6 071 m',design:'J. Soler Peix',
+  say:'Vingårdsbana i hjärtat av Empordà – golf och vinoterapi i ett.'},
+ {namn:'Montanyà',resort:'',lvl:['ny','mellan'],par:72,langd:'6 184 m',design:'Dave Thomas',
+  say:'En pärla intill naturparken Montseny, 35 min från Barcelona.'},
+ {namn:'Llavaneras',resort:'',lvl:['ny','mellan'],par:70,langd:'5 028 m',design:'F.W. Hawtree',
+  say:'Anrik klubb från 1945 med havsutsikt – passar alla, från nybörjare till erfarna.'},
+];
+const HOTELS={
+ camiral:{namn:'Hotel Camiral',stars:5,say:'5★ mitt i toppresorten – ta bagen och promenera till klubbhuset.'},
+ emporda:{namn:'Doubletree Empordà',stars:4,say:'Mellan Links och Forest; kök av Guillem Lama (bakgrund El Bulli).'},
+ lamola:{namn:'Hotel La Mola',stars:4,say:'Granne med El Prats 45 hål, 25 min från Barcelona.'},
+ sanjorge:{namn:'Park Hotel San Jorge',stars:4,say:'På klipporna vid Platja d\'Aro med privat strand.'},
+ peralada:{namn:'Hotel Peralada Wine Spa',stars:5,say:'På egen vingård, Spaniens första Wine Spa.'},
+};
+const EXP={
+ vin:{tag:'Vin & mat',t:'Wine Spa & GourmetBus',p:'Vinoterapi på Peraladas egen vingård, och i Barcelona en GourmetBus-tur med cava och trerättersmiddag.'},
+ konst:{tag:'Konst',t:'Dalís Empordà',p:'Visste du att regionen är Salvador Dalís födelsebygd? Dalí-museet i Figueres och de romerska ruinerna i Empúries ligger en kort körning bort.'},
+ stad:{tag:'Storstad',t:'Barcelona & Camp Nou',p:'Gaudí och Sagrada Família på dagen, en match på Camp Nou på kvällen.'},
+ strand:{tag:'Strand',t:'Costa Bravas vikar',p:'Kustvandringslederna vid Platja d\'Aro tar dig genom pinjeklädda vikar med panoramavyer.'},
+};
+
+/* ---------- state + UI ---------- */
+const thread=document.getElementById('thread');
+let S={name:null,month:null,level:null,interests:[],plan:{hotel:null,courses:[],exps:[]}};
+
+function setPhase(n){document.querySelectorAll('.pp').forEach(p=>{const i=+p.dataset.p;
+  p.classList.toggle('on',i===n);p.classList.toggle('done',i<n);});}
+function scroll(){thread.scrollTop=thread.scrollHeight;}
+function bubble(html,who='bot'){const m=document.createElement('div');m.className='msg '+who;
+  m.innerHTML=`<div class="bubble">${html}</div>`;thread.appendChild(m);scroll();return m;}
+function typing(cb,d=650){const m=document.createElement('div');m.className='msg bot';
+  m.innerHTML='<div class="bubble typing"><span></span><span></span><span></span></div>';thread.appendChild(m);scroll();
+  setTimeout(()=>{m.remove();cb();},d);}
+function chipsRow(list){const r=document.createElement('div');r.className='chips';
+  list.forEach(c=>{const b=document.createElement('button');b.className='chip'+(c.cls?' '+c.cls:'');b.textContent=c.label;b.onclick=()=>c.on(b);r.appendChild(b);});
+  thread.appendChild(r);scroll();return r;}
+
+/* trip tray */
+const tray=document.getElementById('tray');
+document.getElementById('traybar').onclick=()=>tray.classList.toggle('open');
+function planItems(){const it=[];if(S.plan.hotel)it.push({ic:'🏨',b:S.plan.hotel.namn,m:'★'.repeat(S.plan.hotel.stars)+' · din bas'});
+  S.plan.courses.forEach(c=>it.push({ic:'⛳',b:c.namn,m:'Par '+c.par+' · '+c.langd}));
+  S.plan.exps.forEach(e=>it.push({ic:'✨',b:EXP[e].t,m:EXP[e].tag}));return it;}
+function renderTray(){const it=planItems();document.getElementById('traycnt').textContent=it.length;
+  document.getElementById('trayempty').style.display=it.length?'none':'block';
+  document.getElementById('traychips').innerHTML=it.map(x=>`<span class="tchip">${x.ic} ${x.b}</span>`).join('');
+  document.getElementById('trayfull').innerHTML=it.map(x=>`<div class="trow"><div class="ic">${x.ic}</div><div><b>${x.b}</b><div class="m">${x.m}</div></div></div>`).join('');}
+function addHotel(h){S.plan.hotel=h;renderTray();}
+function addCourse(c){if(!S.plan.courses.find(x=>x.namn===c.namn)){S.plan.courses.push(c);renderTray();}}
+function addExp(k){if(!S.plan.exps.includes(k)){S.plan.exps.push(k);renderTray();}}
+
+/* ---------- flow ---------- */
+async function start(){
+  const name=await mem.get('name');const lastDream=await mem.get('lastdream');
+  setPhase(0);
+  typing(()=>{
+    if(name){bubble(`<p class="lead">Välkommen tillbaka, ${name}! 🌿</p>
+      <p>${lastDream?`Förra gången drömde vi om <b>${lastDream}</b>. Ska vi ta upp tråden – eller sikta någon annanstans?`:'Kul att se dig igen. Vart bär drömmen den här gången?'}</p>`);
+      S.name=name;askWhen();}
+    else{bubble(`<p class="lead">Hej! Jag är din caddie. 🏌️</p>
+      <p>Jag är med dig hela vägen – från drömmen, genom planeringen, ända ut på greenen. Just nu kan jag <b>Costa Brava</b> utan och innan. Ska vi forma en resa du minns?</p>
+      <p>Vad ska jag kalla dig?</p>`);
+      const r=document.createElement('div');r.className='inbar';r.style.padding='0 16px 4px';
+      chipsRow([{label:'Hoppa över',on:()=>{askWhen();}}]);
+    }
+  },500);
+}
+// namn fångas via fritext om användaren skriver det innan flödet startat
+function askWhen(){setPhase(0);typing(()=>{
+  bubble(`<p>Först det roliga: <b>när</b> vill du åka? Klimatet formar vilka banor jag lyfter fram.</p>`);
+  chipsRow([
+    {label:'April–juni',on:()=>setWhen('vår','April–juni')},
+    {label:'Juli–aug',on:()=>setWhen('sommar','Juli–augusti')},
+    {label:'Sep–okt',on:()=>setWhen('höst','September–oktober')},
+    {label:'Flexibel',on:()=>setWhen('oklar','Är flexibel')},
+  ]);},600);}
+function setWhen(v,l){bubble(l,'me');S.month=v;askLevel();}
+function askLevel(){typing(()=>{
+  bubble(`<p>Bra. För att läsa er nivå rätt – <b>hur spelar ni?</b></p>`);
+  chipsRow([
+    {label:'Nybörjare / högt hcp',on:()=>setLvl('ny','Nybörjare / högt hcp')},
+    {label:'Mellan',on:()=>setLvl('mellan','Mellanhandicap')},
+    {label:'Låg hcp / rutinerad',on:()=>setLvl('lag','Låg hcp / rutinerad')},
+  ]);},600);}
+function setLvl(v,l){bubble(l,'me');S.level=v;askInterest();}
+function askInterest(){typing(()=>{
+  bubble(`<p>Och det som gör resan till mer än golf – <b>vad lockar utöver banan?</b> Välj flera.</p>`);
+  const opts=[['vin','Vin & mat'],['konst','Konst & kultur'],['stad','Storstad & fotboll'],['strand','Strand & sol']];
+  const row=document.createElement('div');row.className='chips';
+  opts.forEach(([k,l])=>{const b=document.createElement('button');b.className='chip sun';b.textContent=l;
+    b.onclick=()=>{const i=S.interests.indexOf(k);if(i<0){S.interests.push(k);b.classList.add('sel');}else{S.interests.splice(i,1);b.classList.remove('sel');}};
+    row.appendChild(b);});
+  const go=document.createElement('button');go.className='chip go';go.textContent='Bygg min resa →';
+  go.onclick=()=>{bubble(S.interests.length?S.interests.map(k=>EXP[k].tag).join(', '):'Mest golf','me');compose();};
+  row.appendChild(go);thread.appendChild(row);scroll();},600);}
+
+function hotelFor(){const iv=S.interests;
+  if(iv.includes('vin'))return HOTELS.peralada;if(iv.includes('stad'))return HOTELS.lamola;
+  if(iv.includes('strand'))return HOTELS.sanjorge;if(iv.includes('konst'))return HOTELS.emporda;return HOTELS.camiral;}
+function coursesFor(){const primary=COURSES.filter(c=>c.lvl[0]===S.level);
+  const rest=COURSES.filter(c=>c.lvl.includes(S.level)&&c.lvl[0]!==S.level);return [...primary,...rest].slice(0,3);}
+
+function compose(){setPhase(1);
+  typing(()=>{
+    const hotel=hotelFor();const picks=coursesFor();
+    const why={peralada:'du nämnde vin – då bygger vi runt Peraladas vingård och Wine Spa',
+      lamola:'du ville ha storstad – La Mola ligger 25 min från Barcelona',
+      sanjorge:'du ville ha strand – San Jorge har egen vik vid Platja d\'Aro',
+      emporda:'du gillar konst – Empordà ligger mitt i Dalís bygd',
+      camiral:'golfen i topp – då är Camiral den självklara basen'}[Object.keys(HOTELS).find(k=>HOTELS[k]===hotel)];
+    bubble(`<p class="lead">Då sätter vi ihop din vecka på Costa Brava ✨</p>
+      <p>Jag börjar med en bas och tre ronder som passar er nivå – se hur <b>Din resa</b> fylls där uppe medan vi bygger.</p>`);
+    addHotel(hotel);
+    typing(()=>{
+      bubble(`<p>Din bas blir <b>${hotel.namn}</b>. ”${hotel.say}”<div class="why">${why}</div></p>`);
+      let i=0;const addNext=()=>{
+        if(i<picks.length){const c=picks[i++];addCourse(c);
+          let html=`<p><b>${c.namn}</b> — ”${c.say}” <span style="color:var(--stone);font-size:13px">Par ${c.par} · ${c.langd} · ${c.design}</span></p>`;
+          if(c.tip)html+=`<div class="tip"><div class="k">◆ Caddie-tips</div><p>${c.tip}</p></div>`;
+          typing(()=>{bubble(html);addNext();},550);
+        } else {addSurprise();}
+      };addNext();
+    },600);
+  },800);
+}
+function addSurprise(){
+  const iv=S.interests.length?S.interests:['konst'];iv.forEach(k=>addExp(k));
+  const e=EXP[iv[0]];
+  typing(()=>{
+    bubble(`<div class="tip"><div class="k">◆ Visste du att…</div><p>${e.p}</p></div>
+      <p style="margin-top:8px">Jag la in det i din resa. Vill du justera något?</p>`);
+    chipsRow([
+      {label:'Byt till lugnare bana',on:()=>swapEasier()},
+      {label:'Lägg till storstadsnatt',cls:'sun',on:()=>addCity()},
+      {label:'Vad kostar det?',on:()=>price()},
+      {label:'Ser bra ut →',cls:'go',on:()=>prepare()},
+    ]);
+  },700);
+}
+function swapEasier(){bubble('Byt till en lugnare bana','me');
+  typing(()=>{const easy=COURSES.filter(c=>c.lvl.includes('ny')&&!S.plan.courses.find(x=>x.namn===c.namn))[0];
+    if(easy){addCourse(easy);bubble(`<p>Klart. Jag la in <b>${easy.namn}</b>: ”${easy.say}” Ni kan alltid växla på plats.</p>`);}
+    else bubble('<p>Ni har redan de lugnaste inne – fint balanserad vecka!</p>');followUps();},650);}
+function addCity(){bubble('Lägg till storstadsnatt','me');addExp('stad');
+  typing(()=>{bubble(`<p>Perfekt kontrast. Jag lägger in <b>Barcelona & Camp Nou</b> – två nätter vid El Prat, 25 min från stan. Gaudí, tapas och en match.</p>`);followUps();},650);}
+function price(){bubble('Vad kostar det?','me');
+  typing(()=>{bubble(`<p>Greenfees och exakt pris tar din personliga reseguide fram – det gissar jag inte. 🙂 Men jag kan säga att en vecka som den här brukar landa i mellanskiktet. Vill du att guiden räknar på just din resa?</p>`);followUps();},650);}
+function followUps(){chipsRow([
+  {label:'Lägg till storstadsnatt',cls:'sun',on:()=>addCity()},
+  {label:'Byt till lugnare bana',on:()=>swapEasier()},
+  {label:'Ser bra ut →',cls:'go',on:()=>prepare()},
+]);}
+
+function prepare(){bubble('Ser bra ut','me');setPhase(2);
+  typing(()=>{
+    bubble(`<p class="lead">Härligt – då är drömmen och planen på plats. 🌿</p>
+      <p>Och jag släpper dig inte där. När det närmar sig <b>förbereder</b> jag dig:</p>
+      <div class="tip"><div class="k">◆ Inför resan</div><p>Jag bokar in tee-tiderna, påminner om hcp-kort och softspikes, tipsar om lite euro till vägavgifterna – och skickar vägbeskrivningar och restaurangtips för Empordà.</p></div>`);
+    typing(()=>{
+      setPhase(3);
+      bubble(`<p>Och väl <b>på plats</b> tickar jag in dagens tips – som att läsa greenen på TorreMironas hål 5, eller boka bord där kocken kommer från El Bulli.</p>
+        <p>Ska jag spara din resa så guiden kan höra av sig med tider och pris?</p>`);
+      chipsRow([{label:'✉︎ Ja, spara & hör av er',cls:'go',on:()=>finish()},{label:'Bara spara drömmen',on:()=>finish(true)}]);
+    },900);
+  },800);
+}
+async function finish(soft){bubble(soft?'Bara spara drömmen':'Ja, spara och hör av er','me');
+  setPhase(4);
+  if(S.name)await mem.set('name',S.name);
+  await mem.set('lastdream','Costa Brava'+(S.month!=='oklar'?' ('+S.month+')':''));
+  typing(()=>{
+    bubble(`<p class="lead">Sparat – jag minns dig till nästa gång. 🏌️</p>
+      <p>${soft?'Din Costa Brava-dröm ligger kvar när du vill ta upp den igen.':'Din reseguide hör av sig med tider och pris. Under tiden – kika på Costa Brava-avsnittet i <b>En Värld av Golf</b> för att komma i stämning.'}</p>
+      <p>Med dig hela vägen. Vi ses på första tee. ⛳</p>`);
+  },800);
+}
+
+/* free text */
+function freeText(t){bubble(t,'me');const s=t.toLowerCase();
+  if(!S.name&&/(jag heter|jag är|namnet är|kalla mig)\s+([a-zåäöéèA-ZÅÄÖ]+)/.test(s)){
+    S.name=s.match(/(jag heter|jag är|namnet är|kalla mig)\s+([a-zåäöéèA-ZÅÄÖ]+)/)[2];
+    S.name=S.name.charAt(0).toUpperCase()+S.name.slice(1);}
+  const map={vin:'vin',mat:'vin',dalí:'konst',dali:'konst',konst:'konst',museum:'konst',stad:'stad',barcelona:'stad',fotboll:'stad',camp:'stad',sagrada:'stad',strand:'strand',sol:'strand',bad:'strand',hav:'strand'};
+  Object.keys(map).forEach(w=>{if(s.includes(w)&&!S.interests.includes(map[w]))S.interests.push(map[w]);});
+  if(/ny|nybörj|hög hcp|höghcp/.test(s))S.level='ny';else if(/låg|proffs|rutiner|scratch|single/.test(s))S.level='lag';else if(!S.level)S.level='mellan';
+  if(/apr|maj|jun|vår/.test(s))S.month='vår';else if(/jul|aug|sommar/.test(s))S.month='sommar';else if(/sep|okt|höst/.test(s))S.month='höst';else if(!S.month)S.month='oklar';
+  typing(()=>{bubble(`<p>${S.name?S.name+', jag':'Jag'} har en bra känsla för vad ni söker – låt mig bygga ett förslag ur vår data…</p>`);compose();},650);
+}
+
+/* controls */
+document.getElementById('send').onclick=go;
+document.getElementById('inp').addEventListener('keydown',e=>{if(e.key==='Enter')go();});
+function go(){const inp=document.getElementById('inp');const v=inp.value.trim();if(!v)return;inp.value='';freeText(v);}
+document.getElementById('reset').onclick=async()=>{await mem.clear();location.reload();};
+
+start();
+</script>
+</body>
+</html>

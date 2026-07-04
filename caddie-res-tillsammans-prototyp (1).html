@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caddie – Res tillsammans | Golf Joy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F4F1E9;--ink:#1C2C24;--pine:#2C5545;--sea:#12706B;--sun:#C0862C;--stone:#7C7666;--line:rgba(28,44,36,.14);--user:#2C5545}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.display{font-family:Fraunces,Georgia,serif;letter-spacing:-.01em}
+.app{max-width:760px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+.top{position:sticky;top:0;z-index:6;background:linear-gradient(180deg,#25453b,#2C5545);color:#F4F1E9;padding:14px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 10px 26px -20px rgba(0,0,0,.7)}
+.avatar{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#3f7a63,#1c7a6f);display:flex;align-items:center;justify-content:center;font-size:20px}
+.who b{font-family:Fraunces;font-weight:600;font-size:18px;display:block;line-height:1.05}
+.who small{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#E7C98B}
+.reset{margin-left:auto;background:rgba(255,255,255,.12);border:0;color:#dfe8e2;font:inherit;font-size:11px;padding:6px 11px;border-radius:999px;cursor:pointer}
+.thread{flex:1;padding:20px 16px 8px;overflow-y:auto}
+.msg{display:flex;margin:11px 0;animation:rise .4s ease both}
+.msg.me{justify-content:flex-end}
+.bubble{max-width:88%;padding:12px 15px;border-radius:18px}
+.bot .bubble{background:#fff;border:1px solid var(--line);border-bottom-left-radius:6px}
+.me .bubble{background:var(--user);color:#F4F1E9;border-bottom-right-radius:6px}
+.bubble p{margin:0 0 8px}.bubble p:last-child{margin:0}
+.bubble .lead{font-family:Fraunces;font-size:18px;line-height:1.3}
+.why{font-size:12.5px;color:var(--sea);font-style:italic;margin-top:6px}
+.why::before{content:"↳ passar dig: "}
+@keyframes rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+.chips{display:flex;flex-wrap:wrap;gap:9px;padding:4px 16px 2px}
+.chip{border:1px solid var(--pine);color:var(--pine);background:#fff;border-radius:999px;padding:11px 15px;font:inherit;font-size:14px;font-weight:500;cursor:pointer;transition:.15s}
+.chip:hover{background:var(--pine);color:#fff}
+.chip.sun{border-color:var(--sun);color:#8a5f18}.chip.sun:hover{background:var(--sun);color:#fff}
+.chip.go{background:var(--sun);border-color:var(--sun);color:#fff}
+/* departure card */
+.dep{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin:6px 0;box-shadow:0 14px 34px -24px rgba(28,44,36,.45);animation:rise .45s ease both}
+.dep .hd{padding:14px 16px 10px;display:flex;align-items:flex-start;gap:10px}
+.dep .date{font-family:Fraunces;font-weight:600;font-size:17px}
+.dep .focus{font-size:12px;color:var(--sea);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+.badge{margin-left:auto;font-size:11px;font-weight:600;background:#eef3ef;color:var(--pine);border-radius:999px;padding:5px 10px;white-space:nowrap}
+.badge.hot{background:var(--sun);color:#fff}
+.dep .bd{padding:0 16px 14px}
+.seats{height:7px;background:#eee7d8;border-radius:99px;overflow:hidden;margin:2px 0 10px}
+.seats i{display:block;height:100%;background:linear-gradient(90deg,var(--sea),var(--pine))}
+.people{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+.person{display:flex;align-items:center;gap:7px;background:#faf8f2;border:1px solid var(--line);border-radius:999px;padding:4px 10px 4px 5px;font-size:12.5px}
+.pav{width:22px;height:22px;border-radius:50%;background:var(--pine);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600}
+.person.free{color:var(--stone);font-style:italic;border-style:dashed}
+.dep .act{display:flex;gap:8px;margin-top:10px}
+.dep .act button{flex:1;border:0;border-radius:999px;padding:11px;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.j-primary{background:var(--sun);color:#fff}
+.j-ghost{background:#fff;border:1px solid var(--line)!important;color:var(--pine)}
+.priv{font-size:12px;color:var(--stone);background:#fffdf7;border:1px dashed rgba(192,134,44,.4);border-radius:10px;padding:9px 12px;margin:4px 0}
+.priv::before{content:"🔒 ";}
+.foot{position:sticky;bottom:0;background:rgba(244,241,233,.93);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:11px 16px}
+.inbar{display:flex;gap:9px;align-items:center}
+.inbar input{flex:1;border:1px solid var(--line);border-radius:999px;padding:12px 16px;font:inherit;font-size:15px;background:#fff}
+.inbar button{border:0;background:var(--pine);color:#fff;border-radius:50%;width:44px;height:44px;font-size:18px;cursor:pointer}
+.trust{text-align:center;font-size:11px;color:var(--stone);margin-top:7px}
+.typing span{display:inline-block;width:6px;height:6px;margin:0 1px;border-radius:50%;background:#b7b2a4;animation:blink 1.2s infinite}
+.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,60%,100%{opacity:.3}30%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.msg,.dep{animation:none}.typing span{animation:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <div class="avatar">🏌️</div>
+    <div class="who"><b>Caddie</b><small>Res tillsammans</small></div>
+    <button class="reset" id="reset">Börja om</button>
+  </div>
+  <div class="thread" id="thread"></div>
+  <div class="foot">
+    <div class="inbar"><input id="inp" placeholder="Skriv fritt…" autocomplete="off"><button id="send">➤</button></div>
+    <div class="trust">Du väljer vad du delar · caddien gör introt, du bestämmer</div>
+  </div>
+</div>
+
+<script>
+const sess={};
+const mem={async get(k){try{if(window.storage){const r=await window.storage.get('cad_'+k);return r?r.value:null;}}catch(e){}try{return localStorage.getItem('cad_'+k);}catch(e){}return sess[k]??null;},
+ async set(k,v){try{if(window.storage){await window.storage.set('cad_'+k,v);return;}}catch(e){}try{localStorage.setItem('cad_'+k,v);return;}catch(e){}sess[k]=v;},
+ async clear(){try{Object.keys(localStorage).forEach(k=>{if(k.startsWith('cad_'))localStorage.removeItem(k);});}catch(e){}}};
+
+/* formande avgångar (illustrativa) */
+const DEPARTURES=[
+ {id:'cbr-okt',date:'5–12 oktober',focus:'Vin & golf · Empordà',level:'Mellanhcp',cap:8,taken:3,hot:true,
+  people:[['E','Erik','hcp 18 · vin'],['M','Marie','hcp 22 · vin & konst'],['J','Johan','hcp 16 · golf']],
+  why:'samma nivå och ni gillar båda vin'},
+ {id:'cbr-sep',date:'21–27 september',focus:'Golf & Barcelona',level:'Låg–mellanhcp',cap:8,taken:6,
+  people:[['P','Patrik','hcp 12'],['A','Anna','hcp 14 · stad'],['L','Lars','hcp 15'],['S','Sofia','hcp 11']],
+  why:'du nämnde storstad – den här kombinerar golf med Barcelona'},
+ {id:'cbr-maj',date:'10–16 maj',focus:'Nybörjarvänlig · lugnt tempo',level:'Högt hcp / nybörjare',cap:6,taken:2,
+  people:[['K','Kerstin','ny'],['B','Bengt','hcp 28']],
+  why:'lugnare banor och sällskap i samma tempo'},
+];
+
+const thread=document.getElementById('thread');
+function scroll(){thread.scrollTop=thread.scrollHeight;}
+function bubble(html,who='bot'){const m=document.createElement('div');m.className='msg '+who;m.innerHTML=`<div class="bubble">${html}</div>`;thread.appendChild(m);scroll();return m;}
+function typing(cb,d=650){const m=document.createElement('div');m.className='msg bot';m.innerHTML='<div class="bubble typing"><span></span><span></span><span></span></div>';thread.appendChild(m);scroll();setTimeout(()=>{m.remove();cb();},d);}
+function chipsRow(list){const r=document.createElement('div');r.className='chips';list.forEach(c=>{const b=document.createElement('button');b.className='chip'+(c.cls?' '+c.cls:'');b.textContent=c.label;b.onclick=()=>c.on(b);r.appendChild(b);});thread.appendChild(r);scroll();return r;}
+
+function depCard(d){
+  const pct=Math.round(d.taken/d.cap*100);
+  const seatsLeft=d.cap-d.taken;
+  const ppl=d.people.map(p=>`<span class="person"><span class="pav">${p[0]}</span>${p[1]} · <span style="color:var(--stone)">${p[2]}</span></span>`).join('')
+    +`<span class="person free">+ din plats</span>`;
+  const el=document.createElement('div');el.className='msg bot';
+  el.innerHTML=`<div class="bubble" style="max-width:94%;padding:0;background:transparent;border:0">
+    <div class="dep">
+      <div class="hd"><div><div class="date">${d.date}</div><div class="focus">${d.focus}</div></div>
+        <span class="badge ${d.hot?'hot':''}">${seatsLeft} platser kvar</span></div>
+      <div class="bd">
+        <div class="seats"><i style="width:${pct}%"></i></div>
+        <div class="people">${ppl}</div>
+        <div class="why">${d.why}</div>
+        <div class="act">
+          <button class="j-primary" data-join="${d.id}">Gå med i avgången</button>
+          <button class="j-ghost" data-info="${d.id}">Vilka reser?</button>
+        </div>
+      </div>
+    </div></div>`;
+  thread.appendChild(el);scroll();
+  el.querySelector('[data-join]').onclick=()=>join(d);
+  el.querySelector('[data-info]').onclick=()=>whoInfo(d);
+}
+
+async function start(){
+  const joined=await mem.get('joined');
+  typing(()=>{
+    if(joined){bubble(`<p class="lead">Välkommen tillbaka! 🌿</p><p>Du är anmäld till avgången <b>${joined}</b>. Två nya har nappat sen sist – jag hör av mig så fort bollen är full. Vill du se sällskapet igen eller titta på fler avgångar?</p>`);
+      chipsRow([{label:'Visa fler avgångar',on:()=>askSolo(true)},{label:'Vilka reser med mig?',cls:'sun',on:()=>{const d=DEPARTURES.find(x=>x.date===joined)||DEPARTURES[0];whoInfo(d);}}]);return;}
+    bubble(`<p class="lead">Ska vi lösa sällskapet redan nu? 🏌️</p>
+      <p>Många av våra finaste resor börjar med att jag kopplar ihop rätt personer redan i planeringen – då står ingen ensam på första tee. Hur reser du?</p>`);
+    chipsRow([
+      {label:'Ensam – gärna sällskap',on:()=>askSolo()},
+      {label:'Vi är ett gäng',on:()=>gang()},
+      {label:'Vi håller oss för oss själva',on:()=>keepTo()},
+    ]);
+  },500);
+}
+function askSolo(returning){if(!returning)bubble('Ensam – gärna sällskap','me');
+  typing(()=>{
+    bubble(`<p>Då fixar vi det. Här är <b>avgångar som formas just nu</b> till Costa Brava – gå med i en, så väver jag ihop er före avresa med en delad plan och en liten gruppchatt.</p>`);
+    DEPARTURES.forEach((d,i)=>setTimeout(()=>depCard(d),i*260));
+    setTimeout(()=>{
+      bubble(`<p>Passar ingen datummässigt? <b>Starta en egen</b> – säg ungefär när, så samlar jag folk runt dig och hör av mig när fler nappar.</p>`);
+      chipsRow([{label:'Starta egen avgång',cls:'sun',on:()=>startOwn()},{label:'Matcha mig med en spelpartner',cls:'sun',on:()=>soloMatch()}]);
+    },DEPARTURES.length*260+300);
+  },700);
+}
+function whoInfo(d){bubble('Vilka reser?','me');
+  typing(()=>{bubble(`<p>På <b>${d.date}</b> (${d.focus.toLowerCase()}) är ${d.taken} anmälda hittills:</p>
+    <p>${d.people.map(p=>`• <b>${p[1]}</b> – ${p[2]}`).join('<br>')}</p>
+    <div class="priv">Jag visar bara förnamn, ungefärligt hcp och intresse tills ni själva vill dela mer. Går du med gör jag introt – du bestämmer om ni tar kontakt före resan.</div>`);
+    chipsRow([{label:'Gå med i den här',cls:'go',on:()=>join(d)},{label:'Se andra avgångar',on:()=>askSolo(true)}]);},700);}
+function join(d){bubble(`Gå med · ${d.date}`,'me');mem.set('joined',d.date);
+  typing(()=>{bubble(`<p class="lead">Klart – du är med! 🎉</p>
+    <p>Jag har lagt dig i avgången <b>${d.date}</b> och öppnat en delad plan + gruppchatt med ${d.people.map(p=>p[1]).join(', ')}. Ni är nu ${d.taken+1} av ${d.cap}.</p>
+    <div class="priv">Din kontaktinfo är dold. När ni vill kan ni släppa fram namn och prata ihop er om tee-tider och en gemensam middag.</div>
+    <p>Jag hör av mig så fort fler nappar – och puttar er vidare till att välja banor tillsammans.</p>`);
+    chipsRow([{label:'Säg hej i gruppchatten',cls:'sun',on:()=>hej(d)},{label:'Klart för nu',cls:'go',on:()=>bubble('<p>Toppen – vi hörs snart. Med dig hela vägen. ⛳</p>')}]);},900);}
+function hej(d){bubble('Hej allihop! Ser fram emot det här 👋','me');
+  typing(()=>{bubble(`<p><b>${d.people[0][1]}:</b> Vad kul, välkommen! Jag röstar för Empordå på torsdagen. 🍷<br><b>${d.people[1]?d.people[1][1]:'Marie'}:</b> Japp – och middag på hotellet med El Bulli-kocken?</p><p>Där är ni igång. Jag håller ihop planen och påminner er när det närmar sig. 🌿</p>`);},800);}
+function startOwn(){bubble('Starta egen avgång','me');
+  typing(()=>{bubble(`<p>Kul! Säg ungefär <b>när</b> och <b>hur ni spelar</b>, så skapar jag en öppen avgång och börjar samla folk. Jag lägger också ut den för andra Golf Joy-resenärer och i nyhetsbrevet.</p><p>När första personen nappar plingar jag dig direkt.</p>`);
+    chipsRow([{label:'Oktober, mellanhcp',cls:'go',on:()=>{mem.set('joined','din egen avgång (okt)');bubble('Oktober, mellanhcp','me');typing(()=>bubble('<p class="lead">Din avgång är öppnad! 🚩</p><p>Jag börjar rally:a ihop sällskap till oktober och hör av mig vid första napp. Du kan bygga banorna redan nu, så ärver de som går med din plan som utgångspunkt.</p>'),700);}}]);},700);}
+function soloMatch(){bubble('Matcha mig med en spelpartner','me');
+  typing(()=>{bubble(`<p>Absolut. <b>Erik</b> (hcp 18, gillar vin) tittar också på Costa Brava i oktober och söker en att fylla bollen med.<div class="why">samma nivå, samma vecka, samma smak för en god middag</div></p>
+    <div class="priv">Vill du att jag gör introt? Jag skickar en hälsning till Erik med det du väljer att dela – ingen kontaktinfo byts förrän ni båda vill.</div>`);
+    chipsRow([{label:'Ja, koppla ihop oss',cls:'go',on:()=>{bubble('Ja, koppla ihop oss','me');mem.set('joined','spelpartner: Erik (okt)');typing(()=>bubble('<p class="lead">Introt är skickat! 🤝</p><p>Jag hör av mig så fort Erik svarar. Under tiden bygger vi klart din resa – nu vet jag att ni blir minst två på första tee.</p>'),700);}},{label:'Visa avgångar istället',on:()=>askSolo(true)}]);},750);}
+function gang(){bubble('Vi är ett gäng','me');
+  typing(()=>{bubble(`<p>Härligt! Då kan jag göra två saker: hålla ihop <b>er</b> plan, och – om ni vill ha en utmaning – <b>matcha er mot ett annat gäng</b> för en vänskapsmatch på plats. Ryder Cup-känsla i miniatyr.</p>`);
+    chipsRow([{label:'Ordna en match mot ett annat gäng',cls:'sun',on:()=>{bubble('Ordna en match','me');typing(()=>bubble('<p>Noterat! Jag ser efter sällskap i samma veckor och nivå och föreslår en match – Sverige mot Sverige på spansk mark. 🇸🇪⛳ Jag återkommer med motståndare.</p>'),700);}},{label:'Bara vår egen plan',on:()=>bubble('<p>Klart – då håller jag ihop er plan och lämnar sällskapet därhän.</p>')}]);},700);}
+function keepTo(){bubble('Vi håller oss för oss själva','me');typing(()=>bubble('<p>Självklart – helt utan att koppla ihop er med andra. Jag finns här för planen, förberedelserna och tipsen på plats ändå. 🌿</p>'),600);}
+
+document.getElementById('send').onclick=go;
+document.getElementById('inp').addEventListener('keydown',e=>{if(e.key==='Enter')go();});
+function go(){const inp=document.getElementById('inp');const v=inp.value.trim();if(!v)return;inp.value='';bubble(v,'me');typing(()=>{bubble('<p>Jag tar med det. Vill du se avgångarna som formas till Costa Brava?</p>');chipsRow([{label:'Visa avgångar',cls:'go',on:()=>askSolo(true)}]);},600);}
+document.getElementById('reset').onclick=async()=>{await mem.clear();location.reload();};
+start();
+</script>
+</body>
+</html>

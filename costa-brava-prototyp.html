@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Costa Brava – En värld av golf | Golf Joy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F1E9;          /* varm kalksten */
+  --paper-2:#EBE6D9;
+  --ink:#1C2C24;            /* djup pinje */
+  --pine:#2C5545;           /* primärgrön */
+  --sea:#12706B;            /* medelhavston */
+  --sun:#C0862C;            /* cava/sol – enda varma accent */
+  --stone:#7C7666;          /* dämpad text */
+  --line:rgba(28,44,36,.14);
+  --shadow:0 1px 2px rgba(28,44,36,.05),0 12px 30px -18px rgba(28,44,36,.25);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.display{font-family:Fraunces,Georgia,serif;font-weight:500;line-height:1.05;letter-spacing:-.01em}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.eyebrow{font-family:Inter;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--sea);font-weight:600}
+.muted{color:var(--stone)}
+
+/* ---- coastline divider (signatur) ---- */
+.coast{display:block;width:100%;height:26px;color:var(--pine);opacity:.5}
+
+/* ---- nav ---- */
+nav{position:sticky;top:0;z-index:20;background:rgba(244,241,233,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+.brand{font-family:Fraunces;font-weight:600;font-size:19px;letter-spacing:-.01em}
+.brand small{font-family:Inter;font-weight:600;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--sun);display:block;margin-top:-2px}
+.navlinks{display:flex;gap:26px;font-size:14px}
+.navlinks a{text-decoration:none;color:var(--stone);font-weight:500}
+.navlinks a:hover{color:var(--pine)}
+@media(max-width:760px){.navlinks{display:none}}
+
+/* ---- hero ---- */
+.hero{position:relative;overflow:hidden;
+  background:
+   radial-gradient(120% 90% at 85% -10%, rgba(18,112,107,.30), transparent 55%),
+   radial-gradient(100% 80% at 0% 110%, rgba(44,85,69,.35), transparent 60%),
+   linear-gradient(180deg,#20423a,#2C5545 60%,#356149);
+  color:#F4F1E9}
+.hero .wrap{padding:78px 24px 70px}
+.hero .eyebrow{color:#E7C98B}
+.hero h1{font-size:clamp(48px,9vw,104px);font-weight:600;margin:.18em 0 .1em;color:#FCFAF3}
+.hero .lede{font-family:Fraunces;font-weight:400;font-style:italic;font-size:clamp(19px,2.6vw,26px);max-width:36ch;color:#E9E4D6}
+.factstrip{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.fact{border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:8px 15px;font-size:13px;font-weight:500;
+  display:flex;gap:8px;align-items:center;background:rgba(255,255,255,.05)}
+.fact b{font-weight:600;color:#F4E9CE}
+
+/* ---- sections ---- */
+section{padding:74px 0}
+.sechead{display:flex;align-items:baseline;gap:16px;margin-bottom:8px}
+.sechead h2{font-size:clamp(28px,4vw,42px)}
+.sechead .n{font-family:Inter;font-weight:600;font-size:13px;color:var(--sun);letter-spacing:.05em}
+.lead-narr{font-family:Fraunces;font-weight:400;font-size:clamp(20px,2.7vw,27px);line-height:1.4;max-width:44ch}
+.body-col{max-width:64ch}
+.body-col p{margin:0 0 18px}
+
+/* ---- practical band ---- */
+.band{background:var(--paper-2)}
+.pgrid{display:grid;grid-template-columns:1.2fr 1fr;gap:48px}
+@media(max-width:760px){.pgrid{grid-template-columns:1fr;gap:34px}}
+.kv{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.kv .k{min-width:120px;font-weight:600;font-size:14px}
+.kv .v{color:var(--stone);font-size:15px}
+.climate{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:14px}
+.mon{text-align:center;border:1px solid var(--line);border-radius:8px;padding:10px 4px;background:#fff}
+.mon .m{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--stone)}
+.mon .t{font-family:Fraunces;font-size:19px;font-weight:600;margin-top:3px}
+.mon.peak{background:var(--sun);color:#fff;border-color:transparent}
+.mon.peak .m,.mon.peak .t{color:#fff}
+
+/* ---- course cards ---- */
+.courses{display:grid;gap:22px}
+.course{display:grid;grid-template-columns:200px 1fr;gap:0;background:#fff;border:1px solid var(--line);
+  border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+@media(max-width:720px){.course{grid-template-columns:1fr}}
+.thumb{position:relative;min-height:210px;color:#fff;display:flex;align-items:flex-end;padding:14px}
+.thumb .ph{position:absolute;inset:0;background:linear-gradient(160deg,#2C5545,#12706B);opacity:.92}
+.thumb .ph.t2{background:linear-gradient(160deg,#356149,#1c7a5a)}
+.thumb .ph.t3{background:linear-gradient(160deg,#155b63,#2C5545)}
+.thumb span{position:relative;font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+.course .in{padding:22px 24px 20px}
+.course h3{font-size:24px;font-weight:600;margin:0}
+.course .resort{font-size:12.5px;letter-spacing:.04em;color:var(--sea);font-weight:600;text-transform:uppercase;margin:3px 0 12px}
+.review{font-size:16px;color:#33413a;margin:0 0 16px}
+.scorecard{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:14px}
+.sc{flex:1 1 auto;min-width:74px;padding:10px 12px;border-right:1px solid var(--line)}
+.sc:last-child{border-right:0}
+.sc .l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone)}
+.sc .d{font-family:Fraunces;font-size:18px;font-weight:600;margin-top:2px}
+.sig{font-size:14px;color:var(--sun);font-weight:500;margin:0 0 12px}
+.sig::before{content:"◆ ";font-size:10px;vertical-align:middle}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:5px 11px;color:var(--pine);background:#fbfaf6}
+.chip b{color:var(--stone);font-weight:600}
+.gf{margin-left:auto;font-size:12px;color:var(--stone);font-style:italic;align-self:center}
+
+/* ---- hotels ---- */
+.hotels{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+@media(max-width:720px){.hotels{grid-template-columns:1fr}}
+.hotel{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+.hotel .ph{height:140px;background:linear-gradient(160deg,#c9b487,#a58a5a)}
+.hotel .ph.h2{background:linear-gradient(160deg,#8fb0a2,#4f8571)}
+.hotel .ph.h3{background:linear-gradient(160deg,#b9ab8a,#8a8578)}
+.hotel .in{padding:20px 22px}
+.hotel h3{font-size:21px;margin:0 0 2px}
+.stars{color:var(--sun);font-size:13px;letter-spacing:2px;margin-bottom:10px}
+.hotel .review{font-size:14.5px}
+.hfacts{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+
+/* ---- experiences ---- */
+.exp{background:var(--pine);color:#EEEADD}
+.exp .eyebrow{color:#E7C98B}
+.exp .sechead h2{color:#FCFAF3}
+.expgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+@media(max-width:760px){.expgrid{grid-template-columns:1fr}}
+.ecard{border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:22px;background:rgba(255,255,255,.04)}
+.ecard h3{font-size:20px;color:#FCFAF3;margin:0 0 8px}
+.ecard p{font-size:14.5px;color:#D9D4C4;margin:0}
+.ecard .tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#E7C98B;font-weight:600;display:block;margin-bottom:10px}
+
+/* ---- media ---- */
+.media{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+@media(max-width:760px){.media{grid-template-columns:1fr}}
+.mcard{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+.mcard .ph{height:150px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;letter-spacing:.1em}
+.mcard .ph.film{background:linear-gradient(135deg,#1C2C24,#2C5545)}
+.mcard .ph.blog{background:linear-gradient(135deg,#12706B,#356149)}
+.mcard .ph.gal{background:linear-gradient(135deg,#a58a5a,#c9b487)}
+.mcard .in{padding:16px 18px}
+.mcard h3{font-size:17px;margin:0 0 4px}
+.mcard p{font-size:13.5px;color:var(--stone);margin:0}
+
+/* ---- CTA ---- */
+.cta{text-align:center}
+.cta h2{font-size:clamp(30px,5vw,50px);margin:0 0 10px}
+.btn{display:inline-block;background:var(--sun);color:#fff;text-decoration:none;font-weight:600;font-size:15px;
+  padding:14px 28px;border-radius:999px;margin-top:18px}
+.btn.ghost{background:transparent;color:var(--pine);border:1px solid var(--pine);margin-left:10px}
+.news{margin-top:30px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.news input{border:1px solid var(--line);border-radius:999px;padding:12px 18px;font-family:Inter;font-size:14px;min-width:260px;background:#fff}
+
+footer{background:var(--ink);color:#C7CFC9;padding:44px 0;font-size:13.5px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:18px}
+footer a{color:#C7CFC9;text-decoration:none}
+.note{background:#fffdf6;border:1px dashed var(--sun);border-radius:10px;padding:10px 14px;font-size:12.5px;color:#8a6a1e;margin-top:8px}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <div class="brand">Golf Joy<small>En värld av golf</small></div>
+  <div class="navlinks">
+    <a href="#berattelse">Destinationen</a>
+    <a href="#hit">Ta dig hit</a>
+    <a href="#banor">Banor</a>
+    <a href="#boende">Boende</a>
+    <a href="#upplev">Utöver golfen</a>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">Spanien · Katalonien</div>
+  <h1>Costa Brava</h1>
+  <div class="lede">Banor i världsklass, dramatisk kust, ett behagligt klimat – och inte minst: tapas.</div>
+  <div class="factstrip">
+    <div class="fact">⛳ <b>13</b> banor</div>
+    <div class="fact">✈︎ Girona <b>10 min</b> · Barcelona</div>
+    <div class="fact">☀︎ Säsong <b>mars–nov</b></div>
+    <div class="fact">🍷 Empordà – Dalí &amp; vin</div>
+  </div>
+</div></header>
+<svg class="coast" viewBox="0 0 1200 26" preserveAspectRatio="none"><path fill="currentColor" d="M0,10 C120,22 180,2 320,12 C460,22 520,4 680,12 C840,20 900,2 1040,12 C1120,18 1160,10 1200,8 L1200,26 L0,26 Z"/></svg>
+
+<section id="berattelse"><div class="wrap">
+  <div class="sechead"><span class="n">01</span><h2>Ett av våra absoluta favoritresmål</h2></div>
+  <p class="lead-narr rv">Här finns golfbanor av världsklass, oändligt vacker natur, ett behagligt klimat – och en gastronomi som tilltalar den mest kräsna gourmanden.</p>
+  <div class="body-col rv" style="margin-top:22px">
+    <p>Costa Brava sträcker sig längs Kataloniens kust norr om Barcelona, från badvikarna vid Platja d'Aro upp till Empordà – regionen som fött både Salvador Dalí och stjärnkocken Ferran Adrià. Det är en destination där du spelar en förmiddagsrunda mellan pinjer och sjöar, äter lunch med havsutsikt och avslutar dagen med tapas och cava.</p>
+    <p>För golfaren är det ovanligt tätt mellan höjdpunkterna: Camiral (tidigare PGA Catalunya), rankad som Spaniens främsta resort och värd för Ryder Cup 2031, ligger inom en dryg timme från links-lika Empordà, anrika Golf de Pals och det historiska Real Club de Golf El Prat. Lägg till Barcelona med Gaudí och Camp Nou, så förstår du varför vi kommer tillbaka hit år efter år.</p>
+  </div>
+</div></section>
+
+<section class="band" id="hit"><div class="wrap">
+  <div class="sechead"><span class="n">02</span><h2>Ta dig hit &amp; klimat</h2></div>
+  <div class="pgrid" style="margin-top:20px">
+    <div class="rv">
+      <div class="kv"><div class="k">Flyg</div><div class="v">Girona (GRO) – närmast, ~10 min till Camiral. Barcelona (BCN) – störst utbud, ~1 tim till kusten.</div></div>
+      <div class="kv"><div class="k">Flygtid</div><div class="v">Ca 3 timmar från Sverige.</div></div>
+      <div class="kv"><div class="k">Transfer</div><div class="v">Hyrbil rekommenderas – banorna ligger utspridda. Vi ordnar bil eller transfer.</div></div>
+      <div class="kv"><div class="k">Bäst att åka</div><div class="v">April–juni och september–oktober: behagligt, torrt och gröna banor.</div></div>
+    </div>
+    <div class="rv">
+      <div class="eyebrow">Speltemperatur (°C, dagtid)</div>
+      <div class="climate">
+        <div class="mon"><div class="m">Mar</div><div class="t">17°</div></div>
+        <div class="mon peak"><div class="m">Apr</div><div class="t">20°</div></div>
+        <div class="mon peak"><div class="m">Maj</div><div class="t">23°</div></div>
+        <div class="mon"><div class="m">Jun</div><div class="t">27°</div></div>
+        <div class="mon peak"><div class="m">Sep</div><div class="t">26°</div></div>
+        <div class="mon peak"><div class="m">Okt</div><div class="t">22°</div></div>
+      </div>
+      <div class="note">Platshållare – klimatdata och de gyllene månaderna hämtas per destination. Bilder kommer från Cloudinary.</div>
+    </div>
+  </div>
+</div></section>
+
+<section id="banor"><div class="wrap">
+  <div class="sechead"><span class="n">03</span><h2>Banorna</h2></div>
+  <p class="muted rv" style="max-width:52ch;margin:0 0 28px">Vår röst först, fakta som stöd. Klicka dig vidare för scorekort, karta och film. Ett urval visas här – alla 13 banor följer samma mall.</p>
+
+  <div class="courses">
+
+    <article class="course rv">
+      <div class="thumb"><div class="ph"></div><span>[Foto: Stadium Course]</span></div>
+      <div class="in">
+        <h3>PGA Golf Catalunya – Stadium</h3>
+        <div class="resort">Camiral, a Quinta do Lago Resort</div>
+        <p class="review">En suverän golfbana – utmanande och rätt kuperad, där varje hål har sin unika karaktär. Passar från medelgolfaren till låghandikapparen. En av de bästa i Europa och värd för Ryder Cup 2031.</p>
+        <div class="scorecard">
+          <div class="sc"><div class="l">Par</div><div class="d">72</div></div>
+          <div class="sc"><div class="l">Längd (gul)</div><div class="d">6 226 m</div></div>
+          <div class="sc"><div class="l">Design</div><div class="d">Á. Gallardo</div></div>
+          <div class="sc"><div class="l">Bantyp</div><div class="d">Resort</div></div>
+        </div>
+        <div class="chips">
+          <span class="chip"><b>Ligger på</b> · Camiral</span>
+          <span class="chip"><b>Spelas ihop med</b> · Tour Course</span>
+          <span class="chip"><b>Boende nära</b> · Hotel Camiral</span>
+          <span class="gf">Greenfee: på förfrågan</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="course rv">
+      <div class="thumb"><div class="ph t2"></div><span>[Foto: Empordà]</span></div>
+      <div class="in">
+        <h3>Empordà – Forest &amp; Links</h3>
+        <div class="resort">Empordà Golf Resort</div>
+        <p class="review">Två banor av helt olika karaktär. Forest kantas av pinjeträd och är topprankad i Europa. Links är byggd med mycket vatten, sanddyner och enorma greener – så snabba att bollen inte stannar förrän den slutar rulla. :)</p>
+        <div class="scorecard">
+          <div class="sc"><div class="l">Par</div><div class="d">72 / 71</div></div>
+          <div class="sc"><div class="l">Längd</div><div class="d">5 866 / 5 971 m</div></div>
+          <div class="sc"><div class="l">Design</div><div class="d">R. von Hagge</div></div>
+          <div class="sc"><div class="l">Hål</div><div class="d">36</div></div>
+        </div>
+        <div class="chips">
+          <span class="chip"><b>Ligger på</b> · Empordà Resort</span>
+          <span class="chip"><b>Boende nära</b> · Doubletree Empordà</span>
+          <span class="gf">Greenfee: på förfrågan</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="course rv">
+      <div class="thumb"><div class="ph t3"></div><span>[Foto: El Prat]</span></div>
+      <div class="in">
+        <h3>Real Club de Golf El Prat</h3>
+        <div class="resort">Terrassa · 45 hål</div>
+        <p class="review">Europas första bana designad av Greg Norman. 45 mästerskapshål på fem niohålsbanor – en av de allra bästa i Europa. Fairways med mjuka lutningar, stora skogsområden och ondulerade greener. En mästerskapsanläggning där låghandikapparen njuter mest.</p>
+        <div class="scorecard">
+          <div class="sc"><div class="l">Banor</div><div class="d">Open · Rosa · Amarillo</div></div>
+          <div class="sc"><div class="l">Par</div><div class="d">72</div></div>
+          <div class="sc"><div class="l">Design</div><div class="d">Greg Norman</div></div>
+          <div class="sc"><div class="l">År</div><div class="d">2004</div></div>
+        </div>
+        <p class="sig">Rosa – signaturbanan, värd för spanska öppna 10 gånger</p>
+        <div class="chips">
+          <span class="chip"><b>3 banor som</b> spelas ihop</span>
+          <span class="chip"><b>Boende nära</b> · Hotel La Mola</span>
+          <span class="gf">Greenfee: på förfrågan</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="course rv">
+      <div class="thumb"><div class="ph"></div><span>[Foto: TorreMirona]</span></div>
+      <div class="in">
+        <h3>TorreMirona Golf</h3>
+        <div class="resort">TorreMirona Golf &amp; Spa Resort</div>
+        <p class="review">En championshipbana mitt i Empordå med Pyrenéerna som fond. Första nio tekniska och smala, sista nio bredare och plattare, med sjöar och bunkrar i spel.</p>
+        <div class="scorecard">
+          <div class="sc"><div class="l">Par</div><div class="d">72</div></div>
+          <div class="sc"><div class="l">Längd</div><div class="d">5 713 m</div></div>
+          <div class="sc"><div class="l">Design</div><div class="d">Aguado &amp; Soler</div></div>
+          <div class="sc"><div class="l">År</div><div class="d">1993</div></div>
+        </div>
+        <p class="sig">Hål 5 – par 3 med ö-green</p>
+        <div class="chips">
+          <span class="chip"><b>Ligger på</b> · TorreMirona Resort</span>
+          <span class="chip"><b>Boende nära</b> · Hotel Relais</span>
+          <span class="gf">Greenfee: på förfrågan</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</div></section>
+
+<section class="band" id="boende"><div class="wrap">
+  <div class="sechead"><span class="n">04</span><h2>Boende</h2></div>
+  <p class="muted rv" style="max-width:52ch;margin:0 0 26px">Där du vaknar upp och tar bagen till klubbhuset. Ett urval:</p>
+  <div class="hotels">
+
+    <article class="hotel rv">
+      <div class="ph"></div>
+      <div class="in">
+        <h3>Hotel Camiral</h3>
+        <div class="stars">★★★★★</div>
+        <p class="review">Femstjärnigt (Leading Hotels of the World) mitt i resorten, tio minuter från Gironas flygplats. 138 rum, hänförande läge omgivet av Stadium och Tour. Men det allra bästa är ändå banorna – ta bagen och promenera till klubbhuset.</p>
+        <div class="hfacts">
+          <span class="chip"><b>Rum</b> 138</span><span class="chip"><b>Spa</b> ja</span>
+          <span class="chip"><b>Pool</b> ja</span><span class="chip"><b>Till golf</b> gångavstånd</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="hotel rv">
+      <div class="ph h2"></div>
+      <div class="in">
+        <h3>Doubletree by Hilton Empordà</h3>
+        <div class="stars">★★★★</div>
+        <p class="review">Modernt golfhotell i hjärtat av Costa Brava, byggt mellan banorna Links och Forest. 87 ljusa rum med balkong och vyer över Montgrí-bergen. Kök av Guillem Lama, med bakgrund från El Bulli.</p>
+        <div class="hfacts">
+          <span class="chip"><b>Rum</b> 87</span><span class="chip"><b>Spa</b> ja</span>
+          <span class="chip"><b>Gym</b> ja</span><span class="chip"><b>Till golf</b> mellan banorna</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="hotel rv">
+      <div class="ph h3"></div>
+      <div class="in">
+        <h3>Hotel Peralada Wine Spa &amp; Golf</h3>
+        <div class="stars">★★★★★</div>
+        <p class="review">Exklusivt 5★ på egen vingård i Empordà – allt handlar om vin. 55 rum med utsikt över banan och Pyrenéerna. Wine Spa: Spaniens första vinoterapi-center. Nära Dalí-museet och Empúries.</p>
+        <div class="hfacts">
+          <span class="chip"><b>Rum</b> 55</span><span class="chip"><b>Wine Spa</b> ja</span>
+          <span class="chip"><b>Egen bana</b> ja</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="hotel rv">
+      <div class="ph h2"></div>
+      <div class="in">
+        <h3>Park Hotel San Jorge</h3>
+        <div class="stars">★★★★</div>
+        <p class="review">En pärla på klipporna vid Platja d'Aro, högt över två pinjebeklädda vikar. 119 rum, spa med utomhus-jacuzzi och direkt tillgång till en privat strand med kristallklart vatten.</p>
+        <div class="hfacts">
+          <span class="chip"><b>Rum</b> 119</span><span class="chip"><b>Spa</b> ja</span>
+          <span class="chip"><b>Privat strand</b> ja</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</div></section>
+
+<section class="exp" id="upplev"><div class="wrap">
+  <div class="eyebrow">Utöver golfen</div>
+  <div class="sechead"><span class="n">05</span><h2>Golfaren reser sällan ensam</h2></div>
+  <div class="expgrid">
+    <div class="ecard rv"><span class="tag">Gastronomi</span><h3>Tapas &amp; cava</h3><p>Från strandkrogar till Ferran Adriàs Tickets i Barcelona. En GourmetBus-tur med cava och trerättersmiddag är en klassiker.</p></div>
+    <div class="ecard rv"><span class="tag">Konst</span><h3>Dalís Empordà</h3><p>Regionen är Salvador Dalís födelsebygd. Dalí-museet i Figueres, Sant Pere de Rodes och de romerska ruinerna i Empúries.</p></div>
+    <div class="ecard rv"><span class="tag">Storstad</span><h3>Barcelona &amp; Gaudí</h3><p>Sagrada Família, Casa Batlló, La Rambla – och för den fotbollsintresserade: Camp Nou och FC Barcelona.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sechead"><span class="n">06</span><h2>Se, läs, drömma vidare</h2></div>
+  <div class="media">
+    <div class="mcard rv"><div class="ph film">▶ Film</div><div class="in"><h3>En Värld av Golf</h3><p>Costa Brava-avsnittet på vår YouTube-kanal @GolfJoyTravel.</p></div></div>
+    <div class="mcard rv"><div class="ph blog">Artikel</div><div class="in"><h3>Från bloggen</h3><p>"48 timmar i Empordà – golf, Dalí och cava." Länk till artikel.</p></div></div>
+    <div class="mcard rv"><div class="ph gal">Galleri</div><div class="in"><h3>Bildgalleri</h3><p>Ur vårt eget arkiv – banor, kust och klubbhus (Cloudinary).</p></div></div>
+  </div>
+</div></section>
+
+<section class="band cta"><div class="wrap">
+  <div class="eyebrow">Nästa steg</div>
+  <h2 class="rv">Redo för Costa Brava?</h2>
+  <p class="muted rv" style="max-width:40ch;margin:0 auto">Berätta hur du vill resa, så hjälper vi dig vidare.</p>
+  <div class="rv">
+    <a href="#" class="btn">Planera din resa</a>
+    <a href="#" class="btn ghost">Fråga vår golfguide</a>
+  </div>
+  <div class="news rv">
+    <input type="email" placeholder="Din e-post" aria-label="E-post för nyhetsbrev">
+    <a href="#" class="btn">Få nyhetsbrevet</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div><strong>Golf Joy</strong> · En värld av golf<br><span class="muted">golfjoy.se · @GolfJoyTravel</span></div>
+  <div>Costa Brava · Katalonien, Spanien<br><span class="muted">Prototyp – innehåll ur Golf Joys eget material</span></div>
+</div></footer>
+
+<script>
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
