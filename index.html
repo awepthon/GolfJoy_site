@@ -6,83 +6,104 @@
 <title>Golf Joy — En värld av golf att upptäcka</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,900&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,600&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   :root{
-    --pine:#14332c; --pine-deep:#0e2620; --parchment:#f4ecd8; --parchment-2:#efe4c9;
-    --brass:#b8860b; --brass-lite:#c9a227; --ink:#26241f; --sage:#5c6b5d; --line:#d8cba8;
-    --card:#fbf6e9;
+    /* Golf Joy — nuvarande palett (turkos + orange) */
+    --brand:#2cddef;       /* logo-turkos, signaturfärg */
+    --aqua:#4afffa;        /* ljus accent */
+    --teal:#2cb7ba;        /* teal */
+    --teal-2:#2bbfb9;
+    --navy:#12595d;        /* djupt teal — rubriker & struktur (legibelt) */
+    --navy-deep:#0e4a4d;
+    --yellow:#ff9101;      /* orange — energi-accent */
+    --yellow-deep:#e88200;
+    --cream:#f5fbfb;       /* ljus, luftig bas */
+    --cream-2:#e7f5f4;
+    --green:#2cb7ba; --sky:#4afffa;
+    --slate:#154447; --ink:#154447;
+    --muted:#6f9698; --line:#d8ebea; --card:#ffffff;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{background:var(--pine);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+  body{background:var(--cream);color:var(--ink);font-family:'Montserrat',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
 
-  /* Hero */
-  header{background:radial-gradient(120% 140% at 50% -20%,#1c463b 0%,var(--pine) 55%,var(--pine-deep) 100%);color:var(--parchment);padding:64px 0 52px;border-bottom:3px solid var(--brass)}
-  .eyebrow{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--brass-lite);margin-bottom:20px}
-  h1{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(38px,7vw,72px);line-height:1.02;color:var(--parchment);letter-spacing:-.01em}
-  h1 em{font-style:italic;color:var(--brass-lite)}
-  .tagline{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(16px,2.4vw,21px);color:#dcd2b6;margin-top:18px;max-width:44ch}
-  /* proof stamps */
-  .stamps{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
-  .stamp{border:1.5px solid var(--brass);border-radius:3px;padding:12px 18px;background:rgba(184,134,11,.06)}
-  .stamp .n{font-family:'Space Mono',monospace;font-weight:700;font-size:26px;color:var(--parchment);line-height:1}
-  .stamp .l{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass-lite);margin-top:6px}
+  /* Hero — ljus & luftig, marinblått som accent */
+  header{background:var(--cream);padding:76px 0 8px}
+  .eyebrow{font-weight:700;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--yellow-deep);margin-bottom:22px;display:flex;align-items:center;gap:11px}
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--yellow);display:inline-block}
+  h1{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(42px,7.5vw,82px);line-height:1.0;color:var(--navy);letter-spacing:-.02em}
+  h1 em{font-style:italic;color:var(--navy);position:relative;white-space:nowrap}
+  h1 em::after{content:"";position:absolute;left:0;right:0;bottom:.1em;height:.14em;background:var(--yellow);z-index:-1;opacity:.9}
+  .tagline{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(17px,2.3vw,22px);color:var(--slate);margin-top:24px;max-width:46ch;font-weight:400}
 
-  main{background:var(--parchment);min-height:60vh;padding:44px 0 80px}
+  .stamps{display:flex;flex-wrap:wrap;gap:0;margin-top:44px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stamp{padding:20px 34px 18px 0;margin-right:34px;border-right:1px solid var(--line)}
+  .stamp:last-child{border-right:none;margin-right:0}
+  .stamp .n{font-family:'Fraunces',serif;font-weight:900;font-size:38px;color:var(--navy);line-height:1}
+  .stamp .l{font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:7px}
 
-  .setup{background:#fff8e6;border:1.5px solid var(--brass);border-radius:6px;padding:20px 22px;margin-bottom:34px;font-size:14.5px}
-  .setup h3{font-family:'Fraunces',serif;font-size:18px;margin-bottom:8px;color:var(--pine)}
-  .setup code{font-family:'Space Mono',monospace;font-size:12.5px;background:#f0e6c8;padding:1px 6px;border-radius:3px}
+  main{background:var(--cream);min-height:50vh;padding:56px 0 90px}
+
+  .setup{background:#fffdf2;border:1px solid var(--yellow);border-left:4px solid var(--yellow);border-radius:6px;padding:20px 24px;margin-bottom:40px;font-size:14px}
+  .setup h3{font-family:'Fraunces',serif;font-weight:600;font-size:19px;margin-bottom:8px;color:var(--navy)}
+  .setup code{font-family:ui-monospace,monospace;font-size:12.5px;background:var(--cream-2);padding:1px 6px;border-radius:3px;color:var(--navy)}
   .setup ol{margin:10px 0 0 18px}.setup li{margin:4px 0}
 
-  .sechead{display:flex;align-items:baseline;gap:14px;margin:8px 0 20px}
-  .sechead h2{font-family:'Fraunces',serif;font-weight:600;font-size:15px;letter-spacing:.22em;text-transform:uppercase;color:var(--sage)}
-  .sechead .rule{flex:1;height:1px;background:var(--line)}
+  .sechead{display:flex;align-items:center;gap:16px;margin:0 0 30px}
+  .sechead h2{font-weight:700;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--navy)}
+  .sechead .rule{flex:1;height:2px;background:var(--yellow);opacity:.5}
 
-  .country{margin-bottom:40px}
-  .country-name{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(24px,4vw,34px);color:var(--pine);letter-spacing:-.01em;display:flex;align-items:center;gap:12px;margin-bottom:4px}
-  .country-name .ct{font-family:'Space Mono',monospace;font-size:12px;font-weight:400;letter-spacing:.14em;color:var(--brass);background:none;border:1px solid var(--line);border-radius:20px;padding:3px 11px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin-top:16px}
+  .country{margin-bottom:52px}
+  .country-name{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(26px,4vw,38px);color:var(--navy);letter-spacing:-.01em;display:flex;align-items:baseline;gap:14px;margin-bottom:2px}
+  .country-name .ct{font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:16px;margin-top:20px}
 
-  .card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:18px 18px 16px;cursor:pointer;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease;position:relative;text-align:left;font:inherit;color:inherit;width:100%}
-  .card:hover{transform:translateY(-3px);box-shadow:0 10px 26px -14px rgba(20,51,44,.5);border-color:var(--brass)}
-  .card:focus-visible{outline:2.5px solid var(--brass);outline-offset:2px}
-  .card .rn{font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:var(--pine);line-height:1.15;letter-spacing:-.01em}
-  .card .meta{display:flex;gap:16px;margin-top:14px;padding-top:13px;border-top:1px dashed var(--line)}
+  .card-img{height:150px;border-radius:9px 9px 0 0;margin:-20px -20px 0;background-size:cover;background-position:center;background-color:var(--teal);background-image:linear-gradient(135deg,var(--teal),var(--brand));position:relative}
+  .card-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(18,89,93,.08));border-radius:9px 9px 0 0}
+  .card-body{padding-top:15px}
+  .course-img{height:180px;border-radius:8px;margin-bottom:14px;background-size:cover;background-position:center;background-color:var(--teal);background-image:linear-gradient(135deg,var(--teal),var(--brand))}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px 20px 17px;cursor:pointer;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease;position:relative;text-align:left;font:inherit;color:inherit;width:100%;overflow:hidden}
+  .card::before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
+  .card:hover{transform:translateY(-4px);box-shadow:0 14px 30px -16px rgba(42,59,120,.4);border-color:var(--navy)}
+  .card:hover::before{transform:scaleX(1)}
+  .card:focus-visible{outline:2.5px solid var(--navy);outline-offset:2px}
+  .card .rn{font-family:'Fraunces',serif;font-weight:600;font-size:21px;color:var(--navy);line-height:1.15;letter-spacing:-.01em}
+  .card .meta{display:flex;gap:22px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
   .card .meta div{display:flex;flex-direction:column}
-  .card .meta .num{font-family:'Space Mono',monospace;font-weight:700;font-size:19px;color:var(--ink);line-height:1}
-  .card .meta .cap{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);margin-top:5px}
-  .card .voice{color:var(--brass)}
+  .card .meta .num{font-family:'Fraunces',serif;font-weight:900;font-size:24px;color:var(--navy);line-height:1}
+  .card .meta .cap{font-weight:600;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+  .card .voice{color:var(--yellow-deep)}
 
-  /* Course drawer */
-  .overlay{position:fixed;inset:0;background:rgba(14,38,32,.55);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .22s;z-index:40}
+  .overlay{position:fixed;inset:0;background:rgba(31,44,92,.42);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .22s;z-index:40}
   .overlay.open{opacity:1;pointer-events:auto}
-  .drawer{position:fixed;top:0;right:0;height:100%;width:min(560px,94vw);background:var(--parchment);box-shadow:-14px 0 40px -20px rgba(0,0,0,.6);transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.1,1);z-index:41;overflow-y:auto}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:min(560px,94vw);background:var(--cream);box-shadow:-14px 0 44px -20px rgba(31,44,92,.5);transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.1,1);z-index:41;overflow-y:auto}
   .drawer.open{transform:translateX(0)}
-  .drawer-top{background:var(--pine);color:var(--parchment);padding:26px 28px 22px;border-bottom:3px solid var(--brass);position:sticky;top:0;z-index:2}
-  .drawer-top .rk{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--brass-lite)}
-  .drawer-top h3{font-family:'Fraunces',serif;font-weight:900;font-size:26px;margin-top:6px;line-height:1.05}
-  .closex{position:absolute;top:20px;right:22px;background:none;border:1px solid var(--brass);color:var(--parchment);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:17px;line-height:1}
-  .closex:hover{background:var(--brass);color:var(--pine)}
-  .course{padding:20px 28px;border-bottom:1px solid var(--line)}
-  .course h4{font-family:'Fraunces',serif;font-weight:600;font-size:21px;color:var(--pine);letter-spacing:-.01em}
-  .facts{display:flex;flex-wrap:wrap;gap:7px;margin:11px 0}
-  .fact{font-family:'Space Mono',monospace;font-size:11px;color:var(--sage);border:1px solid var(--line);border-radius:3px;padding:3px 8px;background:#fbf6e9}
-  .recension{font-size:14.5px;color:#3a382f;margin-top:8px}
-  .recension.empty{font-style:italic;color:var(--sage);font-size:13.5px}
-  .caddie{margin-top:12px;border-left:3px solid var(--brass);padding:9px 0 9px 14px;background:rgba(184,134,11,.05)}
-  .caddie .lab{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);margin-bottom:4px}
-  .caddie p{font-family:'Fraunces',serif;font-style:italic;font-size:14.5px;color:#3a382f}
-  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-  .tag{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--pine);background:#e7dcbb;border-radius:20px;padding:3px 10px}
+  .drawer-top{background:linear-gradient(135deg,var(--teal) 0%,var(--brand) 100%);color:#fff;padding:28px 30px 24px;border-bottom:4px solid var(--yellow);position:sticky;top:0;z-index:2}
+  .drawer-top .rk{font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow)}
+  .drawer-top h3{font-family:'Fraunces',serif;font-weight:900;font-size:28px;margin-top:6px;line-height:1.05}
+  .closex{position:absolute;top:22px;right:24px;background:none;border:1.5px solid rgba(255,255,255,.5);color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:16px;line-height:1;transition:.15s}
+  .closex:hover{background:var(--yellow);border-color:var(--yellow);color:var(--navy)}
+  .course{padding:22px 30px;border-bottom:1px solid var(--line)}
+  .course h4{font-family:'Fraunces',serif;font-weight:600;font-size:22px;color:var(--navy);letter-spacing:-.01em}
+  .facts{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+  .fact{font-weight:500;font-size:11px;color:var(--slate);border:1px solid var(--line);border-radius:20px;padding:3px 11px;background:#fff}
+  .recension{font-size:14.5px;color:#404a5a;margin-top:9px;line-height:1.65}
+  .recension.empty{font-style:italic;color:var(--muted);font-size:13.5px}
+  .caddie{margin-top:14px;border-left:3px solid var(--yellow);padding:10px 0 10px 15px;background:rgba(253,183,20,.07);border-radius:0 6px 6px 0}
+  .caddie .lab{font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow-deep);margin-bottom:4px}
+  .caddie p{font-family:'Fraunces',serif;font-style:italic;font-size:14.5px;color:#404a5a;line-height:1.6}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:13px}
+  .tag{font-weight:600;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--navy);background:rgba(44,221,239,.16);border-radius:20px;padding:4px 11px}
 
-  .loading,.errbox{text-align:center;padding:60px 20px;color:var(--sage);font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.1em}
-  .errbox{color:#8a3b2f}
-  footer{background:var(--pine-deep);color:#9db0a0;text-align:center;padding:26px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+  .loading,.errbox{text-align:center;padding:60px 20px;color:var(--muted);font-weight:500;font-size:14px}
+  .errbox{color:#c0392b}
+  footer{background:var(--navy);color:#aeb8d6;text-align:center;padding:30px;font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+  footer .y{color:var(--yellow)}
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  @media (max-width:560px){.stamp{padding-right:22px;margin-right:22px}.stamp .n{font-size:30px}}
 </style>
 </head>
 <body>
@@ -99,12 +120,12 @@
   <div class="wrap">
     <div id="setup" class="setup" style="display:none">
       <h3>Koppla din data</h3>
-      Klistra in dina två Supabase-nycklar högst upp i filens <code>&lt;script&gt;</code> (raderna <code>SUPABASE_URL</code> och <code>SUPABASE_ANON_KEY</code>). Du hittar dem i Supabase under <strong>Project Settings → API</strong>.
+      Klistra in dina Supabase-nycklar i <code>SUPABASE_URL</code> och <code>SUPABASE_ANON_KEY</code> högst upp i filens <code>&lt;script&gt;</code>. Du hittar dem i Supabase under <strong>Project Settings → API</strong>.
       <ol>
         <li><code>SUPABASE_URL</code> = Project URL</li>
-        <li><code>SUPABASE_ANON_KEY</code> = publishable (sb_publishable_...)-nyckeln (säker att publicera — den är läsande)</li>
+        <li><code>SUPABASE_ANON_KEY</code> = publishable-nyckeln (säker att publicera — den är läsande)</li>
       </ol>
-      <div style="margin-top:10px;font-style:italic;color:var(--sage)">Visar exempeldata tills nycklarna är inlagda.</div>
+      <div style="margin-top:10px;font-style:italic;color:var(--muted)">Visar exempeldata tills nycklarna är inlagda.</div>
     </div>
 
     <div class="sechead"><h2>Marknader</h2><div class="rule"></div></div>
@@ -122,17 +143,18 @@
   <div id="drawer-body"></div>
 </aside>
 
-<footer>En värld av golf att upptäcka · golfjoy.se</footer>
+<footer>En värld av golf att upptäcka · <span class="y">golfjoy.se</span></footer>
 
 <script>
 /* ============================================================
-   1) KLISTRA IN DINA NYCKLAR HÄR  (Supabase → Project Settings → API)
+   DINA NYCKLAR  (Supabase → Project Settings → API)
    ============================================================ */
 const SUPABASE_URL      = "https://shiwrihkwnvrlxkblaua.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_idQS0sCjpZMK_ML2g6KA4A_OeEdCciw";
+const CLOUDINARY_CLOUD   = "u1rrpbc3";   // din Cloudinary cloud name
+const CLD_FOLDER         = "";           // ev. mapp, t.ex. "golfjoy/" — annars tom
 /* ============================================================ */
 
-// Region → land (för gruppering)
 const LAND = {
   "Costa del Sol":"Spanien","Costa Blanca":"Spanien","Costa Brava":"Spanien","Mallorca":"Spanien",
   "Gran Canaria":"Spanien","Teneriffa":"Spanien","Murcia":"Spanien","Costa de la Luz":"Spanien",
@@ -154,8 +176,11 @@ const DEMO = [
   {kod:"SCO-G001",namn:"St Andrews — Old Course",region:"Fife / St Andrews",designer:"Naturen / Old Tom Morris",par:72,ar_byggd:1400,bantyp:"links",taggar:["links","bucket-list","historia"],recension:"Kanske världens mest mytomspunna bana — 112 bunkrar och the Road Hole.",caddie_read:null}
 ];
 
-let usingDemo=false, sb=null;
-
+let sb=null;
+function imgUrl(kod,w){
+  if(!CLOUDINARY_CLOUD||!kod) return null;
+  return `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/image/upload/f_auto,q_auto,c_fill,g_auto,w_${w||900},h_${Math.round((w||900)*0.62)}/${CLD_FOLDER}${kod}`;
+}
 function stamp(n,l){return `<div class="stamp"><div class="n">${n}</div><div class="l">${l}</div></div>`;}
 
 async function boot(){
@@ -173,32 +198,23 @@ async function boot(){
       return;
     }
   } else {
-    usingDemo=true; rows=DEMO;
+    rows=DEMO;
     document.getElementById("setup").style.display="block";
   }
   render(rows);
 }
 
 function render(rows){
-  // aggregera per region
   const byRegion={};
-  for(const r of rows){
-    const reg=r.region||"—";
-    (byRegion[reg]=byRegion[reg]||[]).push(r);
-  }
-  // stamps
+  for(const r of rows){const reg=r.region||"—";(byRegion[reg]=byRegion[reg]||[]).push(r);}
   const totalBanor=rows.length;
   const totalRost=rows.filter(r=>r.recension&&r.recension.trim()).length;
   const totalLand=new Set(Object.keys(byRegion).map(reg=>LAND[reg]||"Övrigt")).size;
   document.getElementById("stamps").innerHTML =
     stamp(totalBanor,"banor") + stamp(totalRost,"i din röst") + stamp(totalLand,"länder") + stamp(Object.keys(byRegion).length,"regioner");
 
-  // gruppera regioner per land
   const byLand={};
-  for(const reg of Object.keys(byRegion)){
-    const land=LAND[reg]||"Övrigt";
-    (byLand[land]=byLand[land]||[]).push(reg);
-  }
+  for(const reg of Object.keys(byRegion)){const land=LAND[reg]||"Övrigt";(byLand[land]=byLand[land]||[]).push(reg);}
   const order=[...LAND_ORDER.filter(l=>byLand[l]),...Object.keys(byLand).filter(l=>!LAND_ORDER.includes(l))];
 
   let html="";
@@ -209,18 +225,22 @@ function render(rows){
     for(const reg of regs){
       const list=byRegion[reg];
       const rost=list.filter(r=>r.recension&&r.recension.trim()).length;
+      const heroKod=(list.find(x=>x.recension&&x.recension.trim())||list[0]||{}).kod;
+      const hero=imgUrl(heroKod,600);
       html+=`<button class="card" data-region="${encodeURIComponent(reg)}">
+        <div class="card-img"${hero?` style="background-image:url('${hero}')"`:''}></div>
+        <div class="card-body">
         <div class="rn">${reg}</div>
         <div class="meta">
           <div><span class="num">${list.length}</span><span class="cap">banor</span></div>
           <div><span class="num voice">${rost}</span><span class="cap">i din röst</span></div>
+        </div>
         </div></button>`;
     }
     html+="</div></div>";
   }
   const host=document.getElementById("regions");
   host.innerHTML=html;
-  // spara data för drawer
   window.__data=byRegion; window.__land=LAND;
   host.querySelectorAll(".card").forEach(c=>c.addEventListener("click",()=>openRegion(decodeURIComponent(c.dataset.region))));
 }
@@ -242,7 +262,9 @@ function openRegion(reg){
       ? `<div class="caddie"><div class="lab">Caddiens läsning</div><p>${esc(c.caddie_read)}</p></div>` : "";
     const tags = (c.taggar&&c.taggar.length)
       ? `<div class="tags">${c.taggar.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>` : "";
-    return `<div class="course"><h4>${esc(c.namn)}</h4><div class="facts">${facts}</div>${rec}${caddie}${tags}</div>`;
+    const ci=imgUrl(c.kod,700);
+    const img = ci ? `<div class="course-img" style="background-image:url('${ci}')"></div>` : '';
+    return `<div class="course">${img}<h4>${esc(c.namn)}</h4><div class="facts">${facts}</div>${rec}${caddie}${tags}</div>`;
   }).join("");
   document.getElementById("overlay").classList.add("open");
   document.getElementById("drawer").classList.add("open");
