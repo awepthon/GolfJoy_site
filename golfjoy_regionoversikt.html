@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Golf Joy — En värld av golf att upptäcka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,900&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src= "https://shiwrihkwnvrlxkblaua.supabase.co";
+src = "sb_publishable_idQS0sCjpZMK_ML2g6KA4A_OeEdCciw";"></script>
+<style>
+  :root{
+    --pine:#14332c; --pine-deep:#0e2620; --parchment:#f4ecd8; --parchment-2:#efe4c9;
+    --brass:#b8860b; --brass-lite:#c9a227; --ink:#26241f; --sage:#5c6b5d; --line:#d8cba8;
+    --card:#fbf6e9;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--pine);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+
+  /* Hero */
+  header{background:radial-gradient(120% 140% at 50% -20%,#1c463b 0%,var(--pine) 55%,var(--pine-deep) 100%);color:var(--parchment);padding:64px 0 52px;border-bottom:3px solid var(--brass)}
+  .eyebrow{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--brass-lite);margin-bottom:20px}
+  h1{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(38px,7vw,72px);line-height:1.02;color:var(--parchment);letter-spacing:-.01em}
+  h1 em{font-style:italic;color:var(--brass-lite)}
+  .tagline{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(16px,2.4vw,21px);color:#dcd2b6;margin-top:18px;max-width:44ch}
+  /* proof stamps */
+  .stamps{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+  .stamp{border:1.5px solid var(--brass);border-radius:3px;padding:12px 18px;background:rgba(184,134,11,.06)}
+  .stamp .n{font-family:'Space Mono',monospace;font-weight:700;font-size:26px;color:var(--parchment);line-height:1}
+  .stamp .l{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass-lite);margin-top:6px}
+
+  main{background:var(--parchment);min-height:60vh;padding:44px 0 80px}
+
+  .setup{background:#fff8e6;border:1.5px solid var(--brass);border-radius:6px;padding:20px 22px;margin-bottom:34px;font-size:14.5px}
+  .setup h3{font-family:'Fraunces',serif;font-size:18px;margin-bottom:8px;color:var(--pine)}
+  .setup code{font-family:'Space Mono',monospace;font-size:12.5px;background:#f0e6c8;padding:1px 6px;border-radius:3px}
+  .setup ol{margin:10px 0 0 18px}.setup li{margin:4px 0}
+
+  .sechead{display:flex;align-items:baseline;gap:14px;margin:8px 0 20px}
+  .sechead h2{font-family:'Fraunces',serif;font-weight:600;font-size:15px;letter-spacing:.22em;text-transform:uppercase;color:var(--sage)}
+  .sechead .rule{flex:1;height:1px;background:var(--line)}
+
+  .country{margin-bottom:40px}
+  .country-name{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(24px,4vw,34px);color:var(--pine);letter-spacing:-.01em;display:flex;align-items:center;gap:12px;margin-bottom:4px}
+  .country-name .ct{font-family:'Space Mono',monospace;font-size:12px;font-weight:400;letter-spacing:.14em;color:var(--brass);background:none;border:1px solid var(--line);border-radius:20px;padding:3px 11px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin-top:16px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:18px 18px 16px;cursor:pointer;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease;position:relative;text-align:left;font:inherit;color:inherit;width:100%}
+  .card:hover{transform:translateY(-3px);box-shadow:0 10px 26px -14px rgba(20,51,44,.5);border-color:var(--brass)}
+  .card:focus-visible{outline:2.5px solid var(--brass);outline-offset:2px}
+  .card .rn{font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:var(--pine);line-height:1.15;letter-spacing:-.01em}
+  .card .meta{display:flex;gap:16px;margin-top:14px;padding-top:13px;border-top:1px dashed var(--line)}
+  .card .meta div{display:flex;flex-direction:column}
+  .card .meta .num{font-family:'Space Mono',monospace;font-weight:700;font-size:19px;color:var(--ink);line-height:1}
+  .card .meta .cap{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);margin-top:5px}
+  .card .voice{color:var(--brass)}
+
+  /* Course drawer */
+  .overlay{position:fixed;inset:0;background:rgba(14,38,32,.55);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .22s;z-index:40}
+  .overlay.open{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:min(560px,94vw);background:var(--parchment);box-shadow:-14px 0 40px -20px rgba(0,0,0,.6);transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.1,1);z-index:41;overflow-y:auto}
+  .drawer.open{transform:translateX(0)}
+  .drawer-top{background:var(--pine);color:var(--parchment);padding:26px 28px 22px;border-bottom:3px solid var(--brass);position:sticky;top:0;z-index:2}
+  .drawer-top .rk{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--brass-lite)}
+  .drawer-top h3{font-family:'Fraunces',serif;font-weight:900;font-size:26px;margin-top:6px;line-height:1.05}
+  .closex{position:absolute;top:20px;right:22px;background:none;border:1px solid var(--brass);color:var(--parchment);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:17px;line-height:1}
+  .closex:hover{background:var(--brass);color:var(--pine)}
+  .course{padding:20px 28px;border-bottom:1px solid var(--line)}
+  .course h4{font-family:'Fraunces',serif;font-weight:600;font-size:21px;color:var(--pine);letter-spacing:-.01em}
+  .facts{display:flex;flex-wrap:wrap;gap:7px;margin:11px 0}
+  .fact{font-family:'Space Mono',monospace;font-size:11px;color:var(--sage);border:1px solid var(--line);border-radius:3px;padding:3px 8px;background:#fbf6e9}
+  .recension{font-size:14.5px;color:#3a382f;margin-top:8px}
+  .recension.empty{font-style:italic;color:var(--sage);font-size:13.5px}
+  .caddie{margin-top:12px;border-left:3px solid var(--brass);padding:9px 0 9px 14px;background:rgba(184,134,11,.05)}
+  .caddie .lab{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);margin-bottom:4px}
+  .caddie p{font-family:'Fraunces',serif;font-style:italic;font-size:14.5px;color:#3a382f}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .tag{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--pine);background:#e7dcbb;border-radius:20px;padding:3px 10px}
+
+  .loading,.errbox{text-align:center;padding:60px 20px;color:var(--sage);font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.1em}
+  .errbox{color:#8a3b2f}
+  footer{background:var(--pine-deep);color:#9db0a0;text-align:center;padding:26px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Golf Joy · Caddie</div>
+    <h1>En värld av golf<br>att <em>upptäcka</em></h1>
+    <p class="tagline">Byggd på 25 år av verkliga svenska golfresor. Vi gissar aldrig — vi vet, för vi har sett det hända tusentals gånger.</p>
+    <div class="stamps" id="stamps"></div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div id="setup" class="setup" style="display:none">
+      <h3>Koppla din data</h3>
+      Klistra in dina två Supabase-nycklar högst upp i filens <code>&lt;script&gt;</code> (raderna <code>SUPABASE_URL</code> och <code>SUPABASE_ANON_KEY</code>). Du hittar dem i Supabase under <strong>Project Settings → API</strong>.
+      <ol>
+        <li><code>SUPABASE_URL</code> = Project URL</li>
+        <li><code>SUPABASE_ANON_KEY</code> = anon/public-nyckeln (säker att publicera — den är läsande)</li>
+      </ol>
+      <div style="margin-top:10px;font-style:italic;color:var(--sage)">Visar exempeldata tills nycklarna är inlagda.</div>
+    </div>
+
+    <div class="sechead"><h2>Marknader</h2><div class="rule"></div></div>
+    <div id="regions"><div class="loading">Läser in banor…</div></div>
+  </div>
+</main>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="Banor i regionen">
+  <div class="drawer-top">
+    <button class="closex" id="closex" aria-label="Stäng">✕</button>
+    <div class="rk" id="drawer-country"></div>
+    <h3 id="drawer-region"></h3>
+  </div>
+  <div id="drawer-body"></div>
+</aside>
+
+<footer>En värld av golf att upptäcka · golfjoy.se</footer>
+
+<script>
+/* ============================================================
+   1) KLISTRA IN DINA NYCKLAR HÄR  (Supabase → Project Settings → API)
+   ============================================================ */
+const SUPABASE_URL      = "DIN_PROJECT_URL_HÄR";     // t.ex. https://xxxx.supabase.co
+const SUPABASE_ANON_KEY = "DIN_ANON_KEY_HÄR";         // anon/public
+/* ============================================================ */
+
+// Region → land (för gruppering)
+const LAND = {
+  "Costa del Sol":"Spanien","Costa Blanca":"Spanien","Costa Brava":"Spanien","Mallorca":"Spanien",
+  "Gran Canaria":"Spanien","Teneriffa":"Spanien","Murcia":"Spanien","Costa de la Luz":"Spanien",
+  "Costa Daurada":"Spanien","Costa Dorada":"Spanien",
+  "Algarve":"Portugal","Lissabon":"Portugal","Porto e Norte":"Portugal","Madeira":"Portugal","Óbidos (Silver Coast)":"Portugal","Azorerna":"Portugal",
+  "Irland":"Irland","Dublin & Central":"Irland",
+  "Rom":"Italien","Piemonte":"Italien","Toscana":"Italien","Emilia-Romagna":"Italien",
+  "Cypern":"Cypern","Polen":"Polen","Danmark":"Danmark","Tyskland":"Tyskland","Berlin":"Tyskland",
+  "Kent":"England","Surrey":"England","Yorkshire":"England","London / The Belfry":"England","London":"England",
+  "England's Golf Coast":"England","England's Atlantic Links":"England",
+  "Fife / St Andrews":"Skottland","Angus":"Skottland","East Lothian":"Skottland","Ayrshire":"Skottland",
+  "Highlands":"Skottland","Perthshire":"Skottland"
+};
+const LAND_ORDER = ["Spanien","Portugal","England","Skottland","Irland","Italien","Tyskland","Danmark","Polen","Cypern"];
+
+const DEMO = [
+  {kod:"ESP-G008",namn:"Alicante Golf",region:"Costa Blanca",designer:"Severiano Ballesteros",par:72,ar_byggd:1998,bantyp:"parkbana",taggar:["parkland","resort"],recension:"En trevlig parkbana med romerska ruiner ute på banan och fem sjöar i spel på tolv hål.",caddie_read:"Håll utkik efter de romerska lämningarna — ett pittoreskt inslag få banor kan matcha."},
+  {kod:"ESP-G162",namn:"La Manga South",region:"Costa Blanca",designer:"Robert Putman / Arnold Palmer",par:73,ar_byggd:null,bantyp:"mästerskap",taggar:["bucket-list","utmaning"],recension:"Mästerskapsbanan på La Manga Club — den längsta och mest krävande av resortens tre.",caddie_read:null},
+  {kod:"SCO-G001",namn:"St Andrews — Old Course",region:"Fife / St Andrews",designer:"Naturen / Old Tom Morris",par:72,ar_byggd:1400,bantyp:"links",taggar:["links","bucket-list","historia"],recension:"Kanske världens mest mytomspunna bana — 112 bunkrar och the Road Hole.",caddie_read:null}
+];
+
+let usingDemo=false, sb=null;
+
+function stamp(n,l){return `<div class="stamp"><div class="n">${n}</div><div class="l">${l}</div></div>`;}
+
+async function boot(){
+  const configured = SUPABASE_URL && !SUPABASE_URL.includes("DIN_") && SUPABASE_ANON_KEY && !SUPABASE_ANON_KEY.includes("DIN_");
+  let rows=[];
+  if(configured){
+    try{
+      sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      const {data,error} = await sb.from("v_bana_full").select("*");
+      if(error) throw error;
+      rows = data||[];
+    }catch(e){
+      document.getElementById("regions").innerHTML =
+        `<div class="errbox">Kunde inte läsa från Supabase: ${e.message||e}.<br>Kontrollera nycklarna och att vyn v_bana_full finns.</div>`;
+      return;
+    }
+  } else {
+    usingDemo=true; rows=DEMO;
+    document.getElementById("setup").style.display="block";
+  }
+  render(rows);
+}
+
+function render(rows){
+  // aggregera per region
+  const byRegion={};
+  for(const r of rows){
+    const reg=r.region||"—";
+    (byRegion[reg]=byRegion[reg]||[]).push(r);
+  }
+  // stamps
+  const totalBanor=rows.length;
+  const totalRost=rows.filter(r=>r.recension&&r.recension.trim()).length;
+  const totalLand=new Set(Object.keys(byRegion).map(reg=>LAND[reg]||"Övrigt")).size;
+  document.getElementById("stamps").innerHTML =
+    stamp(totalBanor,"banor") + stamp(totalRost,"i din röst") + stamp(totalLand,"länder") + stamp(Object.keys(byRegion).length,"regioner");
+
+  // gruppera regioner per land
+  const byLand={};
+  for(const reg of Object.keys(byRegion)){
+    const land=LAND[reg]||"Övrigt";
+    (byLand[land]=byLand[land]||[]).push(reg);
+  }
+  const order=[...LAND_ORDER.filter(l=>byLand[l]),...Object.keys(byLand).filter(l=>!LAND_ORDER.includes(l))];
+
+  let html="";
+  for(const land of order){
+    const regs=byLand[land].sort((a,b)=>byRegion[b].length-byRegion[a].length);
+    const landBanor=regs.reduce((s,r)=>s+byRegion[r].length,0);
+    html+=`<div class="country"><div class="country-name">${land}<span class="ct">${landBanor} banor</span></div><div class="grid">`;
+    for(const reg of regs){
+      const list=byRegion[reg];
+      const rost=list.filter(r=>r.recension&&r.recension.trim()).length;
+      html+=`<button class="card" data-region="${encodeURIComponent(reg)}">
+        <div class="rn">${reg}</div>
+        <div class="meta">
+          <div><span class="num">${list.length}</span><span class="cap">banor</span></div>
+          <div><span class="num voice">${rost}</span><span class="cap">i din röst</span></div>
+        </div></button>`;
+    }
+    html+="</div></div>";
+  }
+  const host=document.getElementById("regions");
+  host.innerHTML=html;
+  // spara data för drawer
+  window.__data=byRegion; window.__land=LAND;
+  host.querySelectorAll(".card").forEach(c=>c.addEventListener("click",()=>openRegion(decodeURIComponent(c.dataset.region))));
+}
+
+function esc(s){return (s==null?"":String(s)).replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]));}
+
+function openRegion(reg){
+  const list=(window.__data[reg]||[]).slice().sort((a,b)=>(a.namn||"").localeCompare(b.namn||"","sv"));
+  document.getElementById("drawer-country").textContent=window.__land[reg]||"";
+  document.getElementById("drawer-region").textContent=reg;
+  const body=document.getElementById("drawer-body");
+  body.innerHTML = list.map(c=>{
+    const facts=[c.designer, c.par?("Par "+c.par):null, c.ar_byggd?("Anlagd "+c.ar_byggd):null, c.langd_meter?(c.langd_meter+" m"):null, c.bantyp]
+      .filter(Boolean).map(f=>`<span class="fact">${esc(f)}</span>`).join("");
+    const rec = (c.recension&&c.recension.trim())
+      ? `<p class="recension">${esc(c.recension)}</p>`
+      : `<p class="recension empty">Recension på väg — din röst fylls i här.</p>`;
+    const caddie = (c.caddie_read&&c.caddie_read.trim())
+      ? `<div class="caddie"><div class="lab">Caddiens läsning</div><p>${esc(c.caddie_read)}</p></div>` : "";
+    const tags = (c.taggar&&c.taggar.length)
+      ? `<div class="tags">${c.taggar.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>` : "";
+    return `<div class="course"><h4>${esc(c.namn)}</h4><div class="facts">${facts}</div>${rec}${caddie}${tags}</div>`;
+  }).join("");
+  document.getElementById("overlay").classList.add("open");
+  document.getElementById("drawer").classList.add("open");
+}
+function closeDrawer(){document.getElementById("overlay").classList.remove("open");document.getElementById("drawer").classList.remove("open");}
+document.getElementById("closex").addEventListener("click",closeDrawer);
+document.getElementById("overlay").addEventListener("click",closeDrawer);
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDrawer();});
+
+boot();
+</script>
+</body>
+</html>
